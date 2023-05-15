@@ -1,0 +1,3 @@
+C:/Users/RUGAN/Desktop/C++/Third/cmake-build-debug/CMakeFiles/Third.dir
+C:/Users/RUGAN/Desktop/C++/Third/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/RUGAN/Desktop/C++/Third/cmake-build-debug/CMakeFiles/rebuild_cache.dir
