@@ -134,7 +134,7 @@ bool VeryLongInt::check(string number)
 
 VeryLongInt::VeryLongInt(long long int number)
 {
-    sign='+';
+    sign = '+';
     if (number < 0)
     {
         sign = '-';
@@ -224,7 +224,7 @@ VeryLongInt &VeryLongInt::operator-=(const VeryLongInt &other)
  * @param other
  * @return
  */
-VeryLongInt operator*(const VeryLongInt &self,const VeryLongInt &other)
+VeryLongInt operator*(const VeryLongInt &self, const VeryLongInt &other)
 {
     VeryLongInt result;
     int selfLength = self.number.size();
@@ -376,7 +376,7 @@ bool VeryLongInt::operator==(const VeryLongInt &other) const
  * @param other
  * @return
  */
-VeryLongInt operator/(const VeryLongInt &self,const VeryLongInt &other)
+VeryLongInt operator/(const VeryLongInt &self, const VeryLongInt &other)
 {
     VeryLongInt result, temp;
     for (int i = self.number.size() - 1; i >= 0; i--)
@@ -384,7 +384,7 @@ VeryLongInt operator/(const VeryLongInt &self,const VeryLongInt &other)
         temp.number.insert(temp.number.begin(), self.number[i]);
         //因为我的无参构造函数默认有一个元素0，因此在进行计算的时候需要把这个前导零去掉，否则会出问题
 
-            temp.trimZero();
+        temp.trimZero();
 
         int left = 0, right = BASE - 1, ans = 0;
 
@@ -439,25 +439,38 @@ VeryLongInt &VeryLongInt::operator/=(const VeryLongInt &other)
 
 VeryLongInt operator%(const VeryLongInt &self, const VeryLongInt &other)
 {
-    return self-self/other*other;
+    return self - self / other * other;
 }
 
 VeryLongInt &VeryLongInt::operator%=(const VeryLongInt &other)
 {
-    *this=(*this)%other;
+    *this = (*this) % other;
     return *this;
 }
 
 VeryLongInt &VeryLongInt::operator++()
 {
-    *this+=1;
+    *this += 1;
     return *this;
 }
 
 VeryLongInt VeryLongInt::operator++(int)
 {
     VeryLongInt temp = *this;
-    *this+=1;
+    *this += 1;
+    return temp;
+}
+
+VeryLongInt &VeryLongInt::operator--()
+{
+    *this -= 1;
+    return *this;
+}
+
+VeryLongInt VeryLongInt::operator--(int)
+{
+    VeryLongInt temp = *this;
+    *this -= 1;
     return temp;
 }
 

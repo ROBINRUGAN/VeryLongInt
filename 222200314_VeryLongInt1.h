@@ -105,7 +105,7 @@ public:
     /**
      * 处理两个超大整数的*重载
      */
-    friend VeryLongInt operator*(const VeryLongInt &self,const VeryLongInt &other);
+    friend VeryLongInt operator*(const VeryLongInt &self, const VeryLongInt &other);
 
     /**
      * 处理两个超大整数的*=重载
@@ -115,7 +115,7 @@ public:
     /**
      * 处理两个超大整数的/重载
      */
-    friend VeryLongInt operator/(const VeryLongInt &self,const VeryLongInt &other);
+    friend VeryLongInt operator/(const VeryLongInt &self, const VeryLongInt &other);
 
     /**
      * 处理两个超大整数的/=重载
@@ -125,7 +125,7 @@ public:
     /**
      * 处理两个超大整数的%重载
      */
-    friend VeryLongInt operator%(const VeryLongInt &self,const VeryLongInt &other);
+    friend VeryLongInt operator%(const VeryLongInt &self, const VeryLongInt &other);
 
     /**
      * 处理两个超大整数的%=重载
@@ -142,6 +142,15 @@ public:
      */
     VeryLongInt operator++(int);
 
+    /**
+     * 处理超大整数的前--重载
+     */
+    VeryLongInt &operator--();
+
+    /**
+     * 处理超大整数的后--重载
+     */
+    VeryLongInt operator--(int);
 };
 
 ostream &operator<<(ostream &out, const VeryLongInt &veryLongInt);
