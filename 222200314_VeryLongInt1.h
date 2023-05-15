@@ -39,7 +39,10 @@ public:
     //默认构造函数
     VeryLongInt();
 
+    //长整型构造函数
     VeryLongInt(long long number);
+
+    VeryLongInt(const char* a);
 
     VeryLongInt(const VeryLongInt &other);
 
@@ -50,7 +53,7 @@ public:
     /**
      * 处理两个超大整数的+=重载
      */
-    VeryLongInt &operator+=(const VeryLongInt &other);
+    VeryLongInt operator+=(const VeryLongInt &other);
 
     /**
      * 处理两个超大整数的+重载
@@ -151,11 +154,18 @@ public:
      * 处理超大整数的后--重载
      */
     VeryLongInt operator--(int);
+
+
 };
 
 ostream &operator<<(ostream &out, const VeryLongInt &veryLongInt);
 
 istream &operator>>(istream &in, VeryLongInt &veryLongInt);
 
+VeryLongInt absAddUp(VeryLongInt first, VeryLongInt second);
+
+VeryLongInt absSubtractUp(VeryLongInt first, VeryLongInt second);
+
+VeryLongInt abs(VeryLongInt number);
 
 #endif //THIRD_222200314_VERYLONGINT1_H

@@ -161,29 +161,44 @@ void VeryLongInt::trimZero()
     }
 }
 
-VeryLongInt &VeryLongInt::operator+=(const VeryLongInt &other)
+VeryLongInt VeryLongInt::operator+=(const VeryLongInt &other)
 {
-    //carry存放进位的数字大小，maxLength存放生成的超大整数长度
-    int carry = 0, maxLength = 0;
-
-    // 以两个数较长的一个为基准，进行按位加法操作，
-    // 并且如果存在进位情况，也就是说会超过已有的位数，则按新增的位数为基准
-    // 当同时超过两个数的长度且没有进位的时候终止循环
-    while (maxLength < number.size() || maxLength < other.number.size() || carry)
+    if (sign == '+' && other.sign == '+')
     {
-        // 被加数的位数不够了，或者可能存在进位操作，因此先预留前导零进行计算
-        // 到时候如果没有进位，多了的0再去掉就可以了
-        if (maxLength == number.size())
-        {
-            number.push_back(0);
-        }
-        // 如果加数比较小，那么就自行补0
-        number[maxLength] += carry + (maxLength < other.number.size() ? other.number[maxLength] : 0);
-        carry = number[maxLength] / BASE;
-        number[maxLength] %= BASE;
-        maxLength++;
+        *this = absAddUp(*this, other);
+        this->sign = '+';
     }
-    trimZero();
+    if (sign == '-' && other.sign == '-')
+    {
+        *this = absAddUp(*this, other);
+        this->sign = '-';
+    }
+    if (sign == '+' && other.sign == '-')
+    {
+        if (abs(*this) < abs(other))
+        {
+            *this = absSubtractUp(other, *this);
+            this->sign = '-';
+        }
+        if (abs(*this) > abs(other))
+        {
+            *this = absSubtractUp(*this, other);
+            this->sign = '+';
+        }
+    }
+    if (sign == '-' && other.sign == '+')
+    {
+        if (abs(*this) < abs(other))
+        {
+            *this = absSubtractUp(other, *this);
+            this->sign = '+';
+        }
+        if (abs(*this) > abs(other))
+        {
+            *this = absSubtractUp(*this, other);
+            this->sign = '-';
+        }
+    }
     return *this;
 }
 
@@ -203,18 +218,7 @@ VeryLongInt operator-(const VeryLongInt &a, const VeryLongInt &b)
 
 VeryLongInt &VeryLongInt::operator-=(const VeryLongInt &other)
 {
-    //borrow存放的是是否借1，maxLength存放的是所生成的超大整数的位数
-    int borrow = 0, maxLength = 0;
-    while (maxLength < number.size() || maxLength < other.number.size())
-    {
-        //这里的borrow有一种超前支付再还款的感觉
-        number[maxLength] -= borrow + (maxLength < other.number.size() ? other.number[maxLength] : 0);
-        borrow = number[maxLength] < 0;
-        number[maxLength] += borrow * BASE;
-        maxLength++;
-    }
-    trimZero();
-    return *this;
+
 }
 
 /**
@@ -261,18 +265,36 @@ VeryLongInt &VeryLongInt::operator*=(const VeryLongInt &other)
 
 VeryLongInt &VeryLongInt::operator=(const VeryLongInt &other)
 {
+    this->sign = other.sign;
     this->number = other.number;
     return *this;
 }
 
+
 bool VeryLongInt::operator<(const VeryLongInt &other) const
 {
-    if (*this == other)
+    //负数一定小于正数，直接返回true
+    if (this->sign == '-' && other.sign == '+')
     {
-
+        return true;
+    }
+    //正数一定大于负数，直接返回false
+    if (this->sign == '+' && other.sign == '-')
+    {
         return false;
     }
+    //如果两数相等，直接出去
+    if (*this == other)
+    {
+        return false;
+    }
+    //接下来就是都是负号，而且两数不相等的情况
+    if (this->sign == '-' && other.sign == '-')
+    {
+        return !(abs(*this) < abs(other));
+    }
 
+    //接下来就是都是正号，而且两数不相等的情况
     if (this->number.size() < other.number.size())
     {
         return true;
@@ -285,12 +307,10 @@ bool VeryLongInt::operator<(const VeryLongInt &other) const
     {
         if (this->number[i] < other.number[i])
         {
-            //cout << "this->number[i]="<<this->number[i]<<" "<< "other.number[i]="<<other.number[i]<<endl;
             return true;
         }
         if (this->number[i] > other.number[i])
         {
-            //cout << "this->number[i]="<<this->number[i]<<" "<< "other.number[i]="<<other.number[i]<<endl;
             return false;
         }
     }
@@ -317,12 +337,28 @@ bool VeryLongInt::operator>=(const VeryLongInt &other) const
 
 bool VeryLongInt::operator>(const VeryLongInt &other) const
 {
-    if (*this == other)
+    //负数一定小于正数，直接返回false
+    if (this->sign == '-' && other.sign == '+')
     {
-
         return false;
     }
+    //正数一定大于负数，直接返回true
+    if (this->sign == '+' && other.sign == '-')
+    {
+        return true;
+    }
+    //如果两数相等，直接出去
+    if (*this == other)
+    {
+        return false;
+    }
+    //接下来就是都是负号，而且两数不相等的情况
+    if (this->sign == '-' && other.sign == '-')
+    {
+        return !(abs(*this) > abs(other));
+    }
 
+    //接下来就是都是正号，而且两数不相等的情况
     if (this->number.size() > other.number.size())
     {
         return true;
@@ -335,16 +371,13 @@ bool VeryLongInt::operator>(const VeryLongInt &other) const
     {
         if (this->number[i] > other.number[i])
         {
-            //cout << "this->number[i]="<<this->number[i]<<" "<< "other.number[i]="<<other.number[i]<<endl;
             return true;
         }
         if (this->number[i] < other.number[i])
         {
-            //cout << "this->number[i]="<<this->number[i]<<" "<< "other.number[i]="<<other.number[i]<<endl;
             return false;
         }
     }
-
 }
 
 bool VeryLongInt::operator!=(const VeryLongInt &other) const
@@ -354,6 +387,10 @@ bool VeryLongInt::operator!=(const VeryLongInt &other) const
 
 bool VeryLongInt::operator==(const VeryLongInt &other) const
 {
+    if (this->sign != other.sign)
+    {
+        return false;
+    }
     if (this->number.size() != other.number.size())
     {
         return false;
@@ -474,6 +511,12 @@ VeryLongInt VeryLongInt::operator--(int)
     return temp;
 }
 
+VeryLongInt::VeryLongInt(const char *a)
+{
+    VeryLongInt v1((string(a)));
+    *this = v1;
+}
+
 
 //重载超大整数的输出功能
 ostream &operator<<(ostream &out, const VeryLongInt &veryLongInt)
@@ -500,6 +543,54 @@ istream &operator>>(istream &in, VeryLongInt &veryLongInt)
     in >> temp;
     veryLongInt = VeryLongInt(temp);
     return in;
+}
+
+VeryLongInt abs(VeryLongInt number)
+{
+    number.sign = '+';
+    return number;
+}
+
+VeryLongInt absAddUp(VeryLongInt first, VeryLongInt second)
+{
+    //carry存放进位的数字大小，maxLength存放生成的超大整数长度
+    int carry = 0, maxLength = 0;
+
+    // 以两个数较长的一个为基准，进行按位加法操作，
+    // 并且如果存在进位情况，也就是说会超过已有的位数，则按新增的位数为基准
+    // 当同时超过两个数的长度且没有进位的时候终止循环
+    while (maxLength < first.number.size() || maxLength < second.number.size() || carry)
+    {
+        // 被加数的位数不够了，或者可能存在进位操作，因此先预留前导零进行计算
+        // 到时候如果没有进位，多了的0再去掉就可以了
+        if (maxLength == first.number.size())
+        {
+            first.number.push_back(0);
+        }
+        // 如果加数比较小，那么就自行补0
+        first.number[maxLength] += carry + (maxLength < second.number.size() ? second.number[maxLength] : 0);
+        carry = first.number[maxLength] / BASE;
+        first.number[maxLength] %= BASE;
+        maxLength++;
+    }
+    first.trimZero();
+    return first;
+}
+
+VeryLongInt absSubtractUp(VeryLongInt first, VeryLongInt second)
+{
+    //borrow存放的是是否借1，maxLength存放的是所生成的超大整数的位数
+    int borrow = 0, maxLength = 0;
+    while (maxLength < first.number.size() || maxLength < second.number.size())
+    {
+        //这里的borrow有一种超前支付再还款的感觉
+        first.number[maxLength] -= borrow + (maxLength < second.number.size() ? second.number[maxLength] : 0);
+        borrow = first.number[maxLength] < 0;
+        first.number[maxLength] += borrow * BASE;
+        maxLength++;
+    }
+    first.trimZero();
+    return first;
 }
 
 
