@@ -448,6 +448,19 @@ VeryLongInt &VeryLongInt::operator%=(const VeryLongInt &other)
     return *this;
 }
 
+VeryLongInt &VeryLongInt::operator++()
+{
+    *this+=1;
+    return *this;
+}
+
+VeryLongInt VeryLongInt::operator++(int)
+{
+    VeryLongInt temp = *this;
+    *this+=1;
+    return temp;
+}
+
 
 //重载超大整数的输出功能
 ostream &operator<<(ostream &out, const VeryLongInt &veryLongInt)

@@ -23,15 +23,21 @@ int main()
         //cout << "v6= " << v6 << endl;
         //cout << "v5/v6= " << v5 / v6 << endl;
 
-        cout << "v3=" << v3 << endl;
-        cout << "v2=" << v2 << endl;
+        cout << "v3= " << v3 << endl;
+        cout << "v2= " << v2 << endl;
         cout << "v3/v2= " << v3 / v2 << endl;
         cout << "v3%v2= " << v3 % v2 << endl;
         v3%=v2;
-        cout << "v3=" << v3 << endl;
-        cout << "v2=" << v2 << endl;
+        cout << "v3= " << v3 << endl;
+        cout << "v2= " << v2 << endl;
         cout << "v3/v2= " << v3 / v2 << endl;
         cout << "v3%v2= " << v3 % v2 << endl;
+
+        cout << "v2= " << v2 << endl;
+        cout << "v2++ " << v2++ << endl;
+        cout << "v2= " << v2 << endl;
+        cout << "++v2= " << ++v2 << endl;
+        cout << "v2= " << v2 << endl;
         //if(v5<v6)
         //{
         //    cout << "v5 < v6" << endl;

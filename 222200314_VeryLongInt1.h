@@ -118,6 +118,11 @@ public:
     friend VeryLongInt operator/(const VeryLongInt &self,const VeryLongInt &other);
 
     /**
+     * 处理两个超大整数的/=重载
+     */
+    VeryLongInt &operator/=(const VeryLongInt &other);
+
+    /**
      * 处理两个超大整数的%重载
      */
     friend VeryLongInt operator%(const VeryLongInt &self,const VeryLongInt &other);
@@ -128,9 +133,14 @@ public:
     VeryLongInt &operator%=(const VeryLongInt &other);
 
     /**
-     * 处理两个超大整数的/=重载
+     * 处理超大整数的前++重载
      */
-    VeryLongInt &operator/=(const VeryLongInt &other);
+    VeryLongInt &operator++();
+
+    /**
+     * 处理超大整数的后++重载
+     */
+    VeryLongInt operator++(int);
 
 };
 
