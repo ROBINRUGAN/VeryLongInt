@@ -12,11 +12,11 @@ using namespace std;
  * 大整数类的自定义抛错
  * @param message
  */
-BigIntException::BigIntException(string message) : message(std::move(message))
+VeryLongIntException::VeryLongIntException(string message) : message(std::move(message))
 {
 }
 
-string BigIntException::what()
+string VeryLongIntException::what()
 {
     return message;
 }
@@ -27,50 +27,85 @@ string BigIntException::what()
  */
 VeryLongInt::VeryLongInt(string number)
 {
-    if (check(number))
-    {
-        //TODO 区分进制
+    int type= check(number);
 
-        //十进制的构造初始化
+    //八进制的话先进行一波进制转换
+    if(type==IS_OCT)
+    {
+        //TODO
+    }
+
+    //十六进制的话先进行一波进制转换
+    else if(type==IS_HEX)
+    {
+        //TODO
+    }
+
+    //十进制的构造初始化
+    else if (type==IS_DEC)
+    {
+        //先记录一下原长度
         int originLength = number.length();
+
+        //如果是十进制的话，要考虑到符号占位问题
         int signBlock = 0;
+
         //一个下标指针，用来分割整数的
         int i;
+
+        //符号默认为+
         sign = '+';
 
+        //如果首位是-号，那么设置，并且标记符号占位
         if (number[0] == '-')
         {
             sign = '-';
             signBlock = 1;
         }
+        //一般情况下是不写+号，但是写了也不算错，同样也要标记符号占位
         else if (number[0] == '+')
         {
             sign = '+';
             signBlock = 1;
         }
 
+        //最最尾巴开始分割，每次移动四位，直到移到边界
+        //这个边界就是符号占位
         for (i = originLength - 4; i >= signBlock; i -= 4)
         {
             // cout << i << endl;  debug
+
+            //然后就开始四位四位的计算，每四位数转成字符串
+            //temp用来保存计算过程的值
             int temp = 0;
             for (int j = i; j <= i + 3; j++)
             {
                 temp = temp * 10 + number[j] - '0';
             }
+
+            //计算完了直接尾插
             this->number.emplace_back(temp);
+
+            //计算完了看一下，如果再移的话越界了，也就是不满四位了，直接退出，
+            //进行单独的特殊判断
             if (i - signBlock < 4)
             {
                 break;
             }
         }
 
+        //这里要注意一下，如果for循环一开始都进不去的话，i的值是负数，所以的话我们要还原i
         if (originLength < 4)
         {
             i = originLength;
         }
+
+        //只要这个i不是0，说明进入了特殊判断环节
         if (i)
         {
             int temp = 0;
+
+            //我们从符号位往后开始计算
             for (int j = signBlock; j <= i - 1; j++)
             {
                 temp = temp * 10 + number[j] - '0';
@@ -79,11 +114,11 @@ VeryLongInt::VeryLongInt(string number)
         }
 
     }
-    else
-    {
-        throw BigIntException("格式错误");
-    }
 
+    else if(type==ERROR)
+    {
+        throw VeryLongIntException("mewww!!!! 这不是合法的十进制/八进制/十六进制!");
+    }
 
 }
 
@@ -101,35 +136,110 @@ VeryLongInt::VeryLongInt()
  * @param number
  * @return
  */
-bool VeryLongInt::check(string number)
+int VeryLongInt::check(string number)
 {
-    //第一位既不是加减号，又不是各种数字的直接驳回
-    if (number[0] != '+' && number[0] != '-' && (number[0] < '0' || number[0] > '9') &&
-            (number[0] < 'A' || number[0] > 'F'))
-    {
+    //一开始默认是错的
+    int type = ERROR;
 
-        return false;
+    //首先我们先判断第一位到底是什么，并且先初步区分
+    //第一位是加号、或者减号、或者是数字0-9，可能是合法十进制数
+    //因为第一位是0的话还可能是八进制数和十进制数
+    if (number[0] == '+' || number[0] == '-' || (number[0] >= '0' && number[0] <= '9'))
+    {
+        type = IS_DEC;
     }
-    if (number.length() > 1)
-    {    //第二位既不是十六进制的x或X，又不是各种数字的直接驳回
-        if (number[1] != 'x' && number[1] != 'X' && (number[1] < '0' || number[1] > '9') &&
-                (number[1] < 'A' || number[1] > 'F'))
+
+    //如果长度只有一位，那么要保证这是0-9的东西，单单正负号不合法，然后就可以返回了，判断完毕
+    if (number.length() == 1)
+    {
+        if (number[0] < '0' || number[0] > '9')
         {
-            return false;
+            type = ERROR;
+        }
+        return type;
+    }
+
+    //接下来进行第二位的判断，既然不是一位数，那么至少两位数
+    //如果第一位是0，那么就只可能是八进制和十六进制了
+    if (number[0] == '0')
+    {
+        //第二位如果是x或者X的话，那么就可能是正确的十六进制了
+        if (number[1] == 'x' || number[1] == 'X')
+        {
+            type = IS_HEX;
+        }
+
+            //不然的话第二位就只能是数字了,而且只能是0-7，不能超过八进制
+        else if (number[1] >= '0' && number[1] <= '7')
+        {
+            type = IS_OCT;
+        }
+
+            //其他的就是错的了，包括非法字符，以及8，9等等
+        else
+        {
+            type = ERROR;
         }
     }
-    if (number.length() > 2)
+
+    //如果这个的长度只有2，那么要保证是个正确的数，比如普普通通的十进制数，如12，
+    //比较短的八进制数，如05这样，
+    //然后不可能是十六进制数，前面已经初步判断过了，所以只需要把十六进制的干掉就行
+    //判断完了就可以直接return了
+    if (number.length() == 2)
     {
-        //不是各种数字的直接驳回
-        for (int i = 2; i < number.length(); i++)
+        //如果可能是十六进制的话
+        if (number[0] == '0' && type == IS_HEX)
         {
-            if ((number[i] < '0' || number[i] > '9') && (number[i] < 'A' || number[i] > 'F'))
+            type = ERROR;
+        }
+        return type;
+    }
+
+    //接下来就是多于两位的情况了，我们已经对三种进制做了区分，现在只需要分三类遍历即可
+    //我们从第三位开始比较
+    for(int i=2;i<number.length();i++)
+    {
+        //初筛后是十进制
+        if(type==IS_DEC)
+        {
+            if(number[i]<'0'||number[i]>'9')
             {
-                return false;
+
+                type=ERROR;
             }
         }
+        //初筛后是八进制
+        else if(type==IS_OCT)
+        {
+            if(number[i]<'0'||number[i]>'7')
+            {
+                type=ERROR;
+            }
+        }
+        //初筛后是十六进制
+        else if(type==IS_HEX)
+        {
+            //正难则反，采用补集思想
+            if(number[i]>='0'&&number[i]<='9'||number[i]>='A'&&number[i]<='F')
+            {
+                type=IS_HEX;
+            }
+            else
+            {
+                type=ERROR;
+            }
+        }
+        //一个独立于他们之外的if，判断是否error
+        //如果都已经是错的了，然后就直接出去
+        //可能是一开始就是ERROR，或者是上面导致变成了ERROR
+        //这样的话上面就不需要写break了，非常方便，也不会浪费时间
+        if(type==ERROR)
+        {
+            break;
+        }
     }
-    return true;
+    return type;
 }
 
 VeryLongInt::VeryLongInt(long long int number)
