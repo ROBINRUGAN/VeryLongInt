@@ -27,97 +27,93 @@ VeryLongInt::VeryLongInt(string number)
 {
     int type = check(number);
 
+    if (type == ERROR)
+    {
+        cout << "0" << endl;
+        throw VeryLongIntException("mewww!!!! 这不是合法的十进制/八进制/十六进制!");
+    }
+
     //八进制的话先进行一波进制转换
     if (type == IS_OCT)
     {
-        //TODO
+        number = change(number, 8, 10);
     }
 
         //十六进制的话先进行一波进制转换
     else if (type == IS_HEX)
     {
-        //TODO
+        number = change(number.substr(2, number.size() - 2), 16, 10);
     }
 
-        //十进制的构造初始化
-    else if (type == IS_DEC)
+    //十进制的构造初始化，上面已经把八进制和十六进制进行转换了
+    //先记录一下原长度
+    int originLength = number.length();
+
+    //如果是十进制的话，要考虑到符号占位问题
+    int signBlock = 0;
+
+    //一个下标指针，用来分割整数的
+    int i;
+
+    //符号默认为+
+    sign = '+';
+
+    //如果首位是-号，那么设置，并且标记符号占位
+    if (number[0] == '-')
     {
-        //先记录一下原长度
-        int originLength = number.length();
-
-        //如果是十进制的话，要考虑到符号占位问题
-        int signBlock = 0;
-
-        //一个下标指针，用来分割整数的
-        int i;
-
-        //符号默认为+
+        sign = '-';
+        signBlock = 1;
+    }
+        //一般情况下是不写+号，但是写了也不算错，同样也要标记符号占位
+    else if (number[0] == '+')
+    {
         sign = '+';
-
-        //如果首位是-号，那么设置，并且标记符号占位
-        if (number[0] == '-')
-        {
-            sign = '-';
-            signBlock = 1;
-        }
-            //一般情况下是不写+号，但是写了也不算错，同样也要标记符号占位
-        else if (number[0] == '+')
-        {
-            sign = '+';
-            signBlock = 1;
-        }
-
-        //最最尾巴开始分割，每次移动四位，直到移到边界
-        //这个边界就是符号占位
-        for (i = originLength - 4; i >= signBlock; i -= 4)
-        {
-            // cout << i << endl;  debug
-
-            //然后就开始四位四位的计算，每四位数转成字符串
-            //temp用来保存计算过程的值
-            int temp = 0;
-            for (int j = i; j <= i + 3; j++)
-            {
-                temp = temp * 10 + number[j] - '0';
-            }
-
-            //计算完了直接尾插
-            this->number.emplace_back(temp);
-
-            //计算完了看一下，如果再移的话越界了，也就是不满四位了，直接退出，
-            //进行单独的特殊判断
-            if (i - signBlock < 4)
-            {
-                break;
-            }
-        }
-
-        //这里要注意一下，如果for循环一开始都进不去的话，i的值是负数，所以的话我们要还原i
-        if (originLength < 4)
-        {
-            i = originLength;
-        }
-
-        //只要这个i不是0，说明进入了特殊判断环节
-        if (i)
-        {
-            int temp = 0;
-
-            //我们从符号位往后开始计算
-            for (int j = signBlock; j <= i - 1; j++)
-            {
-                temp = temp * 10 + number[j] - '0';
-            }
-            this->number.emplace_back(temp);
-        }
-
+        signBlock = 1;
     }
 
-    else if (type == ERROR)
+    //最最尾巴开始分割，每次移动四位，直到移到边界
+    //这个边界就是符号占位
+    for (i = originLength - 4; i >= signBlock; i -= 4)
     {
-        throw VeryLongIntException("mewww!!!! 这不是合法的十进制/八进制/十六进制!");
+        // cout << i << endl;  debug
+
+        //然后就开始四位四位的计算，每四位数转成字符串
+        //temp用来保存计算过程的值
+        int temp = 0;
+        for (int j = i; j <= i + 3; j++)
+        {
+            temp = temp * 10 + number[j] - '0';
+        }
+
+        //计算完了直接尾插
+        this->number.emplace_back(temp);
+
+        //计算完了看一下，如果再移的话越界了，也就是不满四位了，直接退出，
+        //进行单独的特殊判断
+        if (i - signBlock < 4)
+        {
+            break;
+        }
     }
 
+    //这里要注意一下，如果for循环一开始都进不去的话，i的值是负数，所以的话我们要还原i
+    if (originLength < 4)
+    {
+        i = originLength;
+    }
+
+    //只要这个i不是0，说明进入了特殊判断环节
+    if (i)
+    {
+        int temp = 0;
+
+        //我们从符号位往后开始计算
+        for (int j = signBlock; j <= i - 1; j++)
+        {
+            temp = temp * 10 + number[j] - '0';
+        }
+        this->number.emplace_back(temp);
+    }
 }
 
 /**
@@ -660,18 +656,91 @@ VeryLongInt::VeryLongInt(const char *a)
 //重载超大整数的输出功能
 ostream &operator<<(ostream &out, const VeryLongInt &veryLongInt)
 {
+    string number = "";
+    for (int i = veryLongInt.number.size() - 1; i >= 0; i--)
+    {
+
+        if (veryLongInt.number[i] < 1000)
+        {
+            number += "0";
+        }
+        if (veryLongInt.number[i] < 100)
+        {
+            number += "0";
+        }
+        if (veryLongInt.number[i] < 10)
+        {
+            number += "0";
+        }
+        number += to_string(veryLongInt.number[i]);
+    }
+    out << "十进制数为：";
     if (veryLongInt.sign == '-')
     {
         out << veryLongInt.sign;
     }
     for (int i = veryLongInt.number.size() - 1; i >= 0; i--)
     {
+        if (i != veryLongInt.number.size() - 1)
+        {
+            if (veryLongInt.number[i] < 1000)
+            {
+                out << "0";
+            }
+            if (veryLongInt.number[i] < 100)
+            {
+                out << "0";
+            }
+            if (veryLongInt.number[i] < 10)
+            {
+                out << "0";
+            }
+        }
         out << veryLongInt.number[i];
         if (i > 0)
         {
-            cout << ",";
+            out << ",";
         }
     }
+
+    string octNumber = change(number, 10, 8);
+    string hexNumber = change(number, 10, 16);
+
+    //计算出来第一个空格的位置
+    int octBlank = (octNumber.length() - 1) % 4;
+    int hexBlank = (hexNumber.length() - 1) % 4;
+
+    out << endl << "八进制数为：";
+    if (veryLongInt.sign == '-')
+    {
+        out << veryLongInt.sign;
+    }
+    for (int i = 0; i < octNumber.length(); i++)
+    {
+        cout << octNumber[i];
+        if (i == octBlank && octBlank != octNumber.length())
+        {
+            cout << " ";
+            octBlank += 4;
+        }
+    }
+
+
+    out << endl << "十六进制数为：";
+    if (veryLongInt.sign == '-')
+    {
+        out << veryLongInt.sign;
+    }
+    for (int i = 0; i < hexNumber.length(); i++)
+    {
+        cout << hexNumber[i];
+        if (i == hexBlank && hexBlank != hexNumber.length())
+        {
+            cout << " ";
+            hexBlank += 4;
+        }
+    }
+    out << endl;
     return out;
 }
 
@@ -730,6 +799,155 @@ VeryLongInt absSubtractUp(VeryLongInt first, VeryLongInt second)
     }
     first.trimZero();
     return first;
+}
+
+string change(string number, int n, int m)   //n进制转m进制只限0-9进制，若涉及带字母的进制，稍作修改即可
+{
+    //这个是用来处理十六进制数时候的string无法直接转换的问题的
+    int num = 0;
+
+    //这个是每次短除法的商
+    string quotient;
+
+    //这个是最终的转完进制后的结果
+    string ans;
+
+    //这个是余数
+    int remain = 0;
+
+    //如果是0的话，那就直接结束了
+    if (!judge(number))
+    {
+        return "0";
+    }
+
+    //被除数不为0则继续
+    while (judge(number))
+    {
+        for (char i: number)
+        {
+            num = i - '0';
+            if (i == 'A' || i == 'a')
+            {
+                num = 10;
+            }
+            if (i == 'B' || i == 'b')
+            {
+                num = 11;
+            }
+            if (i == 'C' || i == 'c')
+            {
+                num = 12;
+            }
+            if (i == 'D' || i == 'd')
+            {
+                num = 13;
+            }
+            if (i == 'E' || i == 'e')
+            {
+                num = 14;
+            }
+            if (i == 'F' || i == 'f')
+            {
+                num = 15;
+            }
+            int temp = remain * n + num;
+
+            //求出商
+            if (temp / m <= 9)
+            {
+                quotient += temp / m + '0';
+            }
+            else
+            {
+                if (temp / m == 10)
+                {
+                    quotient += 'A';
+                }
+                if (temp / m == 11)
+                {
+                    quotient += 'B';
+                }
+                if (temp / m == 12)
+                {
+                    quotient += 'C';
+                }
+                if (temp / m == 13)
+                {
+                    quotient += 'D';
+                }
+                if (temp / m == 14)
+                {
+                    quotient += 'E';
+                }
+                if (temp / m == 15)
+                {
+                    quotient += 'F';
+                }
+            }
+
+            //求出余数
+            remain = temp % m;
+        }
+
+        //把商赋给下一次的被除数
+        number = quotient;
+
+        //把商清空
+        quotient = "";
+
+        //加上进制转换后数字
+        if (remain <= 9)
+        {
+            ans += remain + '0';
+        }
+        else
+        {
+            if (remain == 10)
+            {
+                ans += 'A';
+            }
+            if (remain == 11)
+            {
+                ans += 'B';
+            }
+            if (remain == 12)
+            {
+                ans += 'C';
+            }
+            if (remain == 13)
+            {
+                ans += 'D';
+            }
+            if (remain == 14)
+            {
+                ans += 'E';
+            }
+            if (remain == 15)
+            {
+                ans += 'F';
+            }
+        }
+
+        //清空余数
+        remain = 0;
+    }
+
+    //倒置ans，这个才是真正的转换后的新进制数
+    reverse(ans.begin(), ans.end());
+    return ans;
+}
+
+bool judge(string s)
+{
+    for (char i: s)
+    {
+        if (i != '0')
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 
