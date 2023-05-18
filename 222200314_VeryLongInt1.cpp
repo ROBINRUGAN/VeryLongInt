@@ -9,8 +9,7 @@ using namespace std;
 
 
 /**
- * 大整数类的自定义抛错
- * @param message
+ * <h3>大整数类的自定义抛错
  */
 VeryLongIntException::VeryLongIntException(string message) : message(std::move(message))
 {
@@ -23,26 +22,25 @@ string VeryLongIntException::what()
 
 /**
  * <h3>超大十进制整数构造函数，转成vector存储
- * @param number
  */
 VeryLongInt::VeryLongInt(string number)
 {
-    int type= check(number);
+    int type = check(number);
 
     //八进制的话先进行一波进制转换
-    if(type==IS_OCT)
+    if (type == IS_OCT)
     {
         //TODO
     }
 
-    //十六进制的话先进行一波进制转换
-    else if(type==IS_HEX)
+        //十六进制的话先进行一波进制转换
+    else if (type == IS_HEX)
     {
         //TODO
     }
 
-    //十进制的构造初始化
-    else if (type==IS_DEC)
+        //十进制的构造初始化
+    else if (type == IS_DEC)
     {
         //先记录一下原长度
         int originLength = number.length();
@@ -62,7 +60,7 @@ VeryLongInt::VeryLongInt(string number)
             sign = '-';
             signBlock = 1;
         }
-        //一般情况下是不写+号，但是写了也不算错，同样也要标记符号占位
+            //一般情况下是不写+号，但是写了也不算错，同样也要标记符号占位
         else if (number[0] == '+')
         {
             sign = '+';
@@ -115,7 +113,7 @@ VeryLongInt::VeryLongInt(string number)
 
     }
 
-    else if(type==ERROR)
+    else if (type == ERROR)
     {
         throw VeryLongIntException("mewww!!!! 这不是合法的十进制/八进制/十六进制!");
     }
@@ -132,9 +130,7 @@ VeryLongInt::VeryLongInt()
 }
 
 /**
- * <h3> 检验是不是合法的10进制/16进制/8进制
- * @param number
- * @return
+ * <h3>检验是不是合法的10进制/16进制/8进制
  */
 int VeryLongInt::check(string number)
 {
@@ -198,43 +194,44 @@ int VeryLongInt::check(string number)
 
     //接下来就是多于两位的情况了，我们已经对三种进制做了区分，现在只需要分三类遍历即可
     //我们从第三位开始比较
-    for(int i=2;i<number.length();i++)
+    for (int i = 2; i < number.length(); i++)
     {
         //初筛后是十进制
-        if(type==IS_DEC)
+        if (type == IS_DEC)
         {
-            if(number[i]<'0'||number[i]>'9')
+            if (number[i] < '0' || number[i] > '9')
             {
 
-                type=ERROR;
+                type = ERROR;
             }
         }
-        //初筛后是八进制
-        else if(type==IS_OCT)
+            //初筛后是八进制
+        else if (type == IS_OCT)
         {
-            if(number[i]<'0'||number[i]>'7')
+            if (number[i] < '0' || number[i] > '7')
             {
-                type=ERROR;
+                type = ERROR;
             }
         }
-        //初筛后是十六进制
-        else if(type==IS_HEX)
+            //初筛后是十六进制
+        else if (type == IS_HEX)
         {
             //正难则反，采用补集思想
-            if(number[i]>='0'&&number[i]<='9'||number[i]>='A'&&number[i]<='F')
+            if (number[i] >= '0' && number[i] <= '9' || number[i] >= 'A' && number[i] <= 'F' ||
+                    number[i] >= 'a' && number[i] <= 'f')
             {
-                type=IS_HEX;
+                type = IS_HEX;
             }
             else
             {
-                type=ERROR;
+                type = ERROR;
             }
         }
         //一个独立于他们之外的if，判断是否error
         //如果都已经是错的了，然后就直接出去
         //可能是一开始就是ERROR，或者是上面导致变成了ERROR
         //这样的话上面就不需要写break了，非常方便，也不会浪费时间
-        if(type==ERROR)
+        if (type == ERROR)
         {
             break;
         }
@@ -371,8 +368,6 @@ VeryLongInt &VeryLongInt::operator-=(const VeryLongInt &other)
  * <h3>高精度乘上高精度
  * <p>时间复杂度为O((n/4)*(m/4))
  * <p>极端情况下为O(n^2)
- * @param other
- * @return
  */
 VeryLongInt operator*(const VeryLongInt &self, const VeryLongInt &other)
 {
@@ -556,8 +551,6 @@ bool VeryLongInt::operator==(const VeryLongInt &other) const
  * <p>利用模拟竖式的思想，并采用二分法确定商的每一位
  * <p>时间复杂度为O(nmlogm)
  * <p>可以近似看成O(n^2)
- * @param other
- * @return
  */
 VeryLongInt operator/(const VeryLongInt &self, const VeryLongInt &other)
 {
