@@ -3,22 +3,29 @@
 
 #include <bits/stdc++.h>
 #include <windows.h>
+#include <conio.h>
 
-#define prePrint     \
-cout << "Copyright (c) 2023-2023 吴荣榜(222200314). All Rights Reserved." << endl << endl; \
-cout << "欢迎进入MEWWW的超大整数类程序ヾ(≧▽≦*)o" << endl
-
-#define catchException     \
-catch (VeryLongIntException &e) \
-{                          \
-    cout << e.what() << endl;  \
-}
-
+#define setRed SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12)
 #define setGreen SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10)
 #define setYellow SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14)
 #define setWhite SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15)
 #define enter(x) setGreen;cin>>x;cin.clear();cin.ignore();setWhite
 #define print(x) setGreen;cout<<x;setWhite
+
+#define prePrint                                                                                \
+system("cls");                                                                                  \
+cout << "Copyright (c) 2023-2023 吴荣榜(222200314). All Rights Reserved." << endl << endl;       \
+cout << "欢迎进入MEWWW的超大整数类程序ヾ(≧▽≦*)o" << endl
+
+#define catchException                  \
+catch (VeryLongIntException &e)         \
+{                                       \
+       cout<<VeryLongInt();             \
+    setRed;                             \
+    cout << e.what() << endl<<endl;     \
+    setWhite;                           \
+}
+
 /**
  * @brief  <h3>采用万进制进行超大整数类的构思，也就是一个单元格可以存储四位的数字
  *
@@ -105,7 +112,7 @@ public:
      * <p>然后这个就直接走十进制/八进制/十六进制的低精度构造了，直接一步到位
      * 让代码变得简洁
      */
-    VeryLongInt(long long number);
+    VeryLongInt(long number);
 
     /**
      * @brief 字符串常量的构造函数

@@ -29,8 +29,9 @@ VeryLongInt::VeryLongInt(string number)
 
     if (type == ERROR)
     {
-        cout << "0" << endl;
-        throw VeryLongIntException("mewww!!!! 这不是合法的十进制/八进制/十六进制!");
+        this->number.push_back(0);
+        throw VeryLongIntException(
+                "mewww!!!! 这不是合法的十进制/八进制/十六进制! (八进制和十六进制记得加上前缀0、0x或0X)");
     }
 
     //八进制的话先进行一波进制转换
@@ -240,18 +241,29 @@ int VeryLongInt::check(string number)
     return type;
 }
 
-VeryLongInt::VeryLongInt(long long int number)
+VeryLongInt::VeryLongInt(long number)
 {
+    if (number > std::numeric_limits<long>::max() || number < std::numeric_limits<long>::min())
+    {
+        throw VeryLongIntException("Value is out of range for long.");
+    }
+    bool calculated = false;
+    long long longerNumber = number;
     sign = '+';
-    if (number < 0)
+    if (longerNumber < 0)
     {
         sign = '-';
-        number = -number;
+        longerNumber = -longerNumber;
     }
-    while (number)
+    while (longerNumber)
     {
-        this->number.emplace_back(number % BASE);
-        number /= BASE;
+        calculated = true;
+        this->number.emplace_back(longerNumber % BASE);
+        longerNumber /= BASE;
+    }
+    if (!calculated)
+    {
+        this->number.emplace_back(longerNumber);
     }
 }
 
