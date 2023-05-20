@@ -1,49 +1,66 @@
 #ifndef THIRD_222200314_VERYLONGINT1_H
 #define THIRD_222200314_VERYLONGINT1_H
 
+#include <bits/stdc++.h>
+#include <windows.h>
+
+#define prePrint     \
+cout << "Copyright (c) 2023-2023 ÎâÈÙ°ñ(222200314). All Rights Reserved." << endl << endl; \
+cout << "»¶Ó­½øÈëMEWWWµÄ³¬´óÕûÊıÀà³ÌĞò©d(¨R¨Œ¨Q*)o" << endl
+
+#define catchException     \
+catch (VeryLongIntException &e) \
+{                          \
+    cout << e.what() << endl;  \
+}
+
+#define setGreen SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10)
+#define setYellow SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14)
+#define setWhite SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15)
+#define enter(x) setGreen;cin>>x;cin.clear();cin.ignore();setWhite
+#define print(x) setGreen;cout<<x;setWhite
 /**
- * @brief  <h3>é‡‡ç”¨ä¸‡è¿›åˆ¶è¿›è¡Œè¶…å¤§æ•´æ•°ç±»çš„æ„æ€ï¼Œä¹Ÿå°±æ˜¯ä¸€ä¸ªå•å…ƒæ ¼å¯ä»¥å­˜å‚¨å››ä½çš„æ•°å­—
+ * @brief  <h3>²ÉÓÃÍò½øÖÆ½øĞĞ³¬´óÕûÊıÀàµÄ¹¹Ë¼£¬Ò²¾ÍÊÇÒ»¸öµ¥Ôª¸ñ¿ÉÒÔ´æ´¢ËÄÎ»µÄÊı×Ö
  *
  * <p>
- * ç„¶åè¿™ä¸ªè¿›åˆ¶æ•°ç›®ä¸èƒ½ç›²ç›®å¢å¤§ï¼Œå› ä¸ºæˆ‘ä»¬è¿˜éœ€è¦è¿›è¡Œé«˜ç²¾åº¦çš„ä¹˜å’Œé™¤ï¼Œ
- * è¿‡å¤§çš„è¯ä¼šå¯¼è‡´æº¢å‡ºæˆ–è€…æ— æ³•è®¡ç®—ï¼Œè€ƒè™‘åˆ°intçš„æœ€å¤§è¾¾åˆ°2147483647ï¼Œ
- * 10000çš„å¹³æ–¹ä¸ºä¸€äº¿ï¼Œè¿™ä¸ªä¹Ÿå·®ä¸å¤šå¤Ÿäº†ï¼Œèƒ½åŸºæœ¬åšåˆ°å……åˆ†åˆ©ç”¨ã€‚
- * å¦åˆ™çš„è¯å¦‚æœå¼€åˆ°30000è¿›åˆ¶ä¹Ÿæ˜¯å¯ä»¥çš„ï¼Œä½†æ˜¯å°±æ˜¯ä¸æ–¹ä¾¿åç»­çš„å„é¡¹æ“ä½œäº†ï¼Œ
- * æ•ˆç‡ä¹Ÿå¹¶æ²¡æœ‰ä»€ä¹ˆæ˜¾è‘—æé«˜ï¼Œå› æ­¤çš„è¯ç»¼åˆè€ƒé‡ä¸‹é‡‡ç”¨ä¸‡è¿›åˆ¶ã€‚
+ * È»ºóÕâ¸ö½øÖÆÊıÄ¿²»ÄÜÃ¤Ä¿Ôö´ó£¬ÒòÎªÎÒÃÇ»¹ĞèÒª½øĞĞ¸ß¾«¶ÈµÄ³ËºÍ³ı£¬
+ * ¹ı´óµÄ»°»áµ¼ÖÂÒç³ö»òÕßÎŞ·¨¼ÆËã£¬¿¼ÂÇµ½intµÄ×î´ó´ïµ½2147483647£¬
+ * 10000µÄÆ½·½ÎªÒ»ÒÚ£¬Õâ¸öÒ²²î²»¶à¹»ÁË£¬ÄÜ»ù±¾×öµ½³ä·ÖÀûÓÃ¡£
+ * ·ñÔòµÄ»°Èç¹û¿ªµ½30000½øÖÆÒ²ÊÇ¿ÉÒÔµÄ£¬µ«ÊÇ¾ÍÊÇ²»·½±ãºóĞøµÄ¸÷Ïî²Ù×÷ÁË£¬
+ * Ğ§ÂÊÒ²²¢Ã»ÓĞÊ²Ã´ÏÔÖøÌá¸ß£¬Òò´ËµÄ»°×ÛºÏ¿¼Á¿ÏÂ²ÉÓÃÍò½øÖÆ¡£
  * <p/>
  *
  * <p>
- * è¿™æ ·ä¸ä»…å¯ä»¥å‡å°‘è¿ç®—æ¬¡æ•°ï¼Œä¹Ÿèƒ½å¾ˆå¤§çš„ä¾¿åˆ©äºç»“æœçš„è¾“å‡ºã€‚
+ * ÕâÑù²»½ö¿ÉÒÔ¼õÉÙÔËËã´ÎÊı£¬Ò²ÄÜºÜ´óµÄ±ãÀûÓÚ½á¹ûµÄÊä³ö¡£
  * <p/>
  */
 #define BASE 10000
 
 /**
- * @brief é”™è¯¯çš„å­—ç¬¦ä¸²
+ * @brief ´íÎóµÄ×Ö·û´®
  */
 #define ERROR 0
 
 /**
- * @brief è¿™æ˜¯åè¿›åˆ¶å­—ç¬¦ä¸²
+ * @brief ÕâÊÇÊ®½øÖÆ×Ö·û´®
  */
 #define IS_DEC 1
 
 /**
- * @brief è¿™æ˜¯å…«è¿›åˆ¶å­—ç¬¦ä¸²
+ * @brief ÕâÊÇ°Ë½øÖÆ×Ö·û´®
  */
 #define IS_OCT 2
 
 /**
- * @brief è¿™æ˜¯åå…­è¿›åˆ¶å­—ç¬¦ä¸²
+ * @brief ÕâÊÇÊ®Áù½øÖÆ×Ö·û´®
  */
 #define IS_HEX 3
 
-#include <bits/stdc++.h>
 
 using namespace std;
 
 /**
- * @brief è‡ªå®šä¹‰çš„æŠ›é”™ç±»ï¼Œç”¨æ¥å­˜æ”¾æŠ¥é”™ä¿¡æ¯
+ * @brief ×Ô¶¨ÒåµÄÅ×´íÀà£¬ÓÃÀ´´æ·Å±¨´íĞÅÏ¢
  */
 class VeryLongIntException : exception
 {
@@ -57,162 +74,162 @@ private:
 };
 
 /**
- * @brief è¶…å¤§æ•´å‹ç±»
+ * @brief ³¬´óÕûĞÍÀà
  */
 class VeryLongInt
 {
 public:
 
     /**
-     * @brief åè¿›åˆ¶æ­£è´Ÿç¬¦å·
+     * @brief Ê®½øÖÆÕı¸º·ûºÅ
      */
     char sign;
 
     /**
-     * @brief è¶…å¤§æ•´æ•°ï¼Œæˆ‘ä»¬é‡‡ç”¨vectorè¿›è¡Œå­˜æ”¾
+     * @brief ³¬´óÕûÊı£¬ÎÒÃÇ²ÉÓÃvector½øĞĞ´æ·Å
      */
     vector<int> number;
 
     /**
-     * @brief å­—ç¬¦ä¸²æ„é€ å‡½æ•°
+     * @brief ×Ö·û´®¹¹Ôìº¯Êı
      */
     VeryLongInt(string number);
 
     /**
-     * @brief é»˜è®¤æ„é€ å‡½æ•°
+     * @brief Ä¬ÈÏ¹¹Ôìº¯Êı
      */
     VeryLongInt();
 
     /**
-     * @brief é•¿æ•´å‹æ„é€ å‡½æ•°
-     * <p>ç„¶åè¿™ä¸ªå°±ç›´æ¥èµ°åè¿›åˆ¶/å…«è¿›åˆ¶/åå…­è¿›åˆ¶çš„ä½ç²¾åº¦æ„é€ äº†ï¼Œç›´æ¥ä¸€æ­¥åˆ°ä½
-     * è®©ä»£ç å˜å¾—ç®€æ´
+     * @brief ³¤ÕûĞÍ¹¹Ôìº¯Êı
+     * <p>È»ºóÕâ¸ö¾ÍÖ±½Ó×ßÊ®½øÖÆ/°Ë½øÖÆ/Ê®Áù½øÖÆµÄµÍ¾«¶È¹¹ÔìÁË£¬Ö±½ÓÒ»²½µ½Î»
+     * ÈÃ´úÂë±äµÃ¼ò½à
      */
     VeryLongInt(long long number);
 
     /**
-     * @brief å­—ç¬¦ä¸²å¸¸é‡çš„æ„é€ å‡½æ•°
-     * <p>è¿™æ˜¯ä¸ºäº†é‡è½½è¿ç®—ä¹‹åæ–¹ä¾¿éšå¼è½¬æ¢
+     * @brief ×Ö·û´®³£Á¿µÄ¹¹Ôìº¯Êı
+     * <p>ÕâÊÇÎªÁËÖØÔØÔËËãÖ®ºó·½±ãÒşÊ½×ª»»
      */
     VeryLongInt(const char *a);
 
     /**
-     * @brief æ‹·è´æ„é€ å‡½æ•°
+     * @brief ¿½±´¹¹Ôìº¯Êı
      */
     VeryLongInt(const VeryLongInt &other);
 
     /**
-     * @brief æ£€éªŒå‡½æ•°ï¼Œå¯ä»¥æ£€éªŒå­—ç¬¦ä¸²æ˜¯ å¼‚å¸¸/åè¿›åˆ¶/å…«è¿›åˆ¶/åå…­è¿›åˆ¶
+     * @brief ¼ìÑéº¯Êı£¬¿ÉÒÔ¼ìÑé×Ö·û´®ÊÇ Òì³£/Ê®½øÖÆ/°Ë½øÖÆ/Ê®Áù½øÖÆ
      */
     int check(string number);
 
     /**
-     * @brief å»æ‰å‰å¯¼é›¶
+     * @brief È¥µôÇ°µ¼Áã
      */
     void trimZero();
 
     /**
-     * @brief å¤„ç†ä¸¤ä¸ªè¶…å¤§æ•´æ•°çš„+=é‡è½½
+     * @brief ´¦ÀíÁ½¸ö³¬´óÕûÊıµÄ+=ÖØÔØ
      */
     VeryLongInt operator+=(const VeryLongInt &other);
 
     /**
-     * @brief å¤„ç†ä¸¤ä¸ªè¶…å¤§æ•´æ•°çš„+é‡è½½
+     * @brief ´¦ÀíÁ½¸ö³¬´óÕûÊıµÄ+ÖØÔØ
      */
     friend VeryLongInt operator+(const VeryLongInt &a, const VeryLongInt &b);
 
     /**
-     * @brief å¤„ç†ä¸¤ä¸ªè¶…å¤§æ•´æ•°çš„-é‡è½½
+     * @brief ´¦ÀíÁ½¸ö³¬´óÕûÊıµÄ-ÖØÔØ
      */
     friend VeryLongInt operator-(const VeryLongInt &a, const VeryLongInt &b);
 
     /**
-    * @brief å¤„ç†ä¸¤ä¸ªè¶…å¤§æ•´æ•°çš„-=é‡è½½
+    * @brief ´¦ÀíÁ½¸ö³¬´óÕûÊıµÄ-=ÖØÔØ
     */
     VeryLongInt &operator-=(const VeryLongInt &other);
 
     /**
-     * @brief å¤„ç†ä¸¤ä¸ªè¶…å¤§æ•´æ•°çš„=é‡è½½
+     * @brief ´¦ÀíÁ½¸ö³¬´óÕûÊıµÄ=ÖØÔØ
      */
     VeryLongInt &operator=(const VeryLongInt &other);
 
     /**
-     * @brief å¤„ç†ä¸¤ä¸ªè¶…å¤§æ•´æ•°çš„\<é‡è½½
+     * @brief ´¦ÀíÁ½¸ö³¬´óÕûÊıµÄ\<ÖØÔØ
      */
     bool operator<(const VeryLongInt &other) const;
 
     /**
-     * @brief å¤„ç†ä¸¤ä¸ªè¶…å¤§æ•´æ•°çš„\<=é‡è½½
+     * @brief ´¦ÀíÁ½¸ö³¬´óÕûÊıµÄ\<=ÖØÔØ
      */
     bool operator<=(const VeryLongInt &other) const;
 
     /**
-     * @brief å¤„ç†ä¸¤ä¸ªè¶…å¤§æ•´æ•°çš„>é‡è½½
+     * @brief ´¦ÀíÁ½¸ö³¬´óÕûÊıµÄ>ÖØÔØ
      */
     bool operator>(const VeryLongInt &other) const;
 
     /**
-     * @brief å¤„ç†ä¸¤ä¸ªè¶…å¤§æ•´æ•°çš„>=é‡è½½
+     * @brief ´¦ÀíÁ½¸ö³¬´óÕûÊıµÄ>=ÖØÔØ
      */
     bool operator>=(const VeryLongInt &other) const;
 
     /**
-     * @brief å¤„ç†ä¸¤ä¸ªè¶…å¤§æ•´æ•°çš„!=é‡è½½
+     * @brief ´¦ÀíÁ½¸ö³¬´óÕûÊıµÄ!=ÖØÔØ
      */
     bool operator!=(const VeryLongInt &other) const;
 
     /**
-     * @brief å¤„ç†ä¸¤ä¸ªè¶…å¤§æ•´æ•°çš„==é‡è½½
+     * @brief ´¦ÀíÁ½¸ö³¬´óÕûÊıµÄ==ÖØÔØ
      */
     bool operator==(const VeryLongInt &other) const;
 
     /**
-     * @brief å¤„ç†ä¸¤ä¸ªè¶…å¤§æ•´æ•°çš„*é‡è½½
+     * @brief ´¦ÀíÁ½¸ö³¬´óÕûÊıµÄ*ÖØÔØ
      */
     friend VeryLongInt operator*(const VeryLongInt &self, const VeryLongInt &other);
 
     /**
-     * @brief å¤„ç†ä¸¤ä¸ªè¶…å¤§æ•´æ•°çš„*=é‡è½½
+     * @brief ´¦ÀíÁ½¸ö³¬´óÕûÊıµÄ*=ÖØÔØ
      */
     VeryLongInt &operator*=(const VeryLongInt &other);
 
     /**
-     * @brief å¤„ç†ä¸¤ä¸ªè¶…å¤§æ•´æ•°çš„/é‡è½½
+     * @brief ´¦ÀíÁ½¸ö³¬´óÕûÊıµÄ/ÖØÔØ
      */
     friend VeryLongInt operator/(const VeryLongInt &self, const VeryLongInt &other);
 
     /**
-     * @brief å¤„ç†ä¸¤ä¸ªè¶…å¤§æ•´æ•°çš„/=é‡è½½
+     * @brief ´¦ÀíÁ½¸ö³¬´óÕûÊıµÄ/=ÖØÔØ
      */
     VeryLongInt &operator/=(const VeryLongInt &other);
 
     /**
-     * @brief å¤„ç†ä¸¤ä¸ªè¶…å¤§æ•´æ•°çš„%é‡è½½
+     * @brief ´¦ÀíÁ½¸ö³¬´óÕûÊıµÄ%ÖØÔØ
      */
     friend VeryLongInt operator%(const VeryLongInt &self, const VeryLongInt &other);
 
     /**
-     * @brief å¤„ç†ä¸¤ä¸ªè¶…å¤§æ•´æ•°çš„%=é‡è½½
+     * @brief ´¦ÀíÁ½¸ö³¬´óÕûÊıµÄ%=ÖØÔØ
      */
     VeryLongInt &operator%=(const VeryLongInt &other);
 
     /**
-     * @brief å¤„ç†è¶…å¤§æ•´æ•°çš„å‰++é‡è½½
+     * @brief ´¦Àí³¬´óÕûÊıµÄÇ°++ÖØÔØ
      */
     VeryLongInt &operator++();
 
     /**
-     * @brief å¤„ç†è¶…å¤§æ•´æ•°çš„å++é‡è½½
+     * @brief ´¦Àí³¬´óÕûÊıµÄºó++ÖØÔØ
      */
     VeryLongInt operator++(int);
 
     /**
-     * @brief å¤„ç†è¶…å¤§æ•´æ•°çš„å‰--é‡è½½
+     * @brief ´¦Àí³¬´óÕûÊıµÄÇ°--ÖØÔØ
      */
     VeryLongInt &operator--();
 
     /**
-     * @brief å¤„ç†è¶…å¤§æ•´æ•°çš„å--é‡è½½
+     * @brief ´¦Àí³¬´óÕûÊıµÄºó--ÖØÔØ
      */
     VeryLongInt operator--(int);
 
@@ -220,39 +237,39 @@ public:
 };
 
 /**
- * @brief é‡è½½è¾“å‡ºè¿ç®—ç¬¦ï¼Œè¾“å‡ºæ­£ç¡®çš„è¶…å¤§æ•´æ•°
+ * @brief ÖØÔØÊä³öÔËËã·û£¬Êä³öÕıÈ·µÄ³¬´óÕûÊı
  */
 ostream &operator<<(ostream &out, const VeryLongInt &veryLongInt);
 
 /**
- * @brief é‡è½½è¾“å…¥è¿ç®—ç¬¦ï¼Œå½•å…¥æ­£ç¡®çš„è¶…å¤§æ•´æ•°
+ * @brief ÖØÔØÊäÈëÔËËã·û£¬Â¼ÈëÕıÈ·µÄ³¬´óÕûÊı
  */
 istream &operator>>(istream &in, VeryLongInt &veryLongInt);
 
 /**
- * @brief ç»å¯¹å€¼çš„ç›¸åŠ 
+ * @brief ¾ø¶ÔÖµµÄÏà¼Ó
  */
 VeryLongInt absAddUp(VeryLongInt first, VeryLongInt second);
 
 /**
- * @brief ç»å¯¹å€¼çš„ç›¸å‡ï¼Œè¦æ±‚æ˜¯å¤§æ•°å‡å°æ•°
+ * @brief ¾ø¶ÔÖµµÄÏà¼õ£¬ÒªÇóÊÇ´óÊı¼õĞ¡Êı
  */
 VeryLongInt absSubtractUp(VeryLongInt first, VeryLongInt second);
 
 /**
- * @brief è¿”å›è¶…å¤§æ•´æ•°ç±»çš„ç»å¯¹å€¼å½¢å¼
+ * @brief ·µ»Ø³¬´óÕûÊıÀàµÄ¾ø¶ÔÖµĞÎÊ½
  */
 VeryLongInt abs(VeryLongInt number);
 
-//åˆ¤æ–­ä¸²æ˜¯å¦ä¸ºå…¨é›¶ä¸²
+//ÅĞ¶Ï´®ÊÇ·ñÎªÈ«Áã´®
 bool judge(string s);
 
 /**
- * @brief è¿›åˆ¶è½¬æ¢å‡½æ•°
- * @param number åŸæ¥çš„nè¿›åˆ¶è¶…å¤§æ•´æ•°
- * @param n åŸæ¥çš„è¿›åˆ¶
- * @param m è¦è½¬çš„è¿›åˆ¶
- * @return è½¬æ¢åçš„å­—ç¬¦ä¸²
+ * @brief ½øÖÆ×ª»»º¯Êı
+ * @param number Ô­À´µÄn½øÖÆ³¬´óÕûÊı
+ * @param n Ô­À´µÄ½øÖÆ
+ * @param m Òª×ªµÄ½øÖÆ
+ * @return ×ª»»ºóµÄ×Ö·û´®
  */
 string change(string number, int n, int m);
 

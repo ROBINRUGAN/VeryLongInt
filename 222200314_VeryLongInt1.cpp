@@ -37,6 +37,7 @@ VeryLongInt::VeryLongInt(string number)
     if (type == IS_OCT)
     {
         number = change(number, 8, 10);
+
     }
 
         //十六进制的话先进行一波进制转换
@@ -73,8 +74,10 @@ VeryLongInt::VeryLongInt(string number)
 
     //最最尾巴开始分割，每次移动四位，直到移到边界
     //这个边界就是符号占位
+    bool calculated = false;
     for (i = originLength - 4; i >= signBlock; i -= 4)
     {
+        calculated = true;
         // cout << i << endl;  debug
 
         //然后就开始四位四位的计算，每四位数转成字符串
@@ -97,7 +100,8 @@ VeryLongInt::VeryLongInt(string number)
     }
 
     //这里要注意一下，如果for循环一开始都进不去的话，i的值是负数，所以的话我们要还原i
-    if (originLength < 4)
+    //更新：如果遇到了-000，也是一开始for就进不去，但是这个时候的i是0！！！
+    if (!calculated)
     {
         i = originLength;
     }
@@ -675,13 +679,14 @@ ostream &operator<<(ostream &out, const VeryLongInt &veryLongInt)
         number += to_string(veryLongInt.number[i]);
     }
     out << "十进制数为：";
+    setGreen;
     if (veryLongInt.sign == '-')
     {
         out << veryLongInt.sign;
     }
     for (int i = veryLongInt.number.size() - 1; i >= 0; i--)
     {
-        if (i != veryLongInt.number.size() - 1)
+        if (i != veryLongInt.number.size() - 1 && veryLongInt.number[i + 1] != 0)
         {
             if (veryLongInt.number[i] < 1000)
             {
@@ -702,6 +707,7 @@ ostream &operator<<(ostream &out, const VeryLongInt &veryLongInt)
             out << ",";
         }
     }
+    setWhite;
 
     string octNumber = change(number, 10, 8);
     string hexNumber = change(number, 10, 16);
@@ -711,6 +717,7 @@ ostream &operator<<(ostream &out, const VeryLongInt &veryLongInt)
     int hexBlank = (hexNumber.length() - 1) % 4;
 
     out << endl << "八进制数为：";
+    setGreen;
     if (veryLongInt.sign == '-')
     {
         out << veryLongInt.sign;
@@ -724,9 +731,10 @@ ostream &operator<<(ostream &out, const VeryLongInt &veryLongInt)
             octBlank += 4;
         }
     }
-
+    setWhite;
 
     out << endl << "十六进制数为：";
+    setGreen;
     if (veryLongInt.sign == '-')
     {
         out << veryLongInt.sign;
@@ -740,6 +748,7 @@ ostream &operator<<(ostream &out, const VeryLongInt &veryLongInt)
             hexBlank += 4;
         }
     }
+    setWhite;
     out << endl;
     return out;
 }
