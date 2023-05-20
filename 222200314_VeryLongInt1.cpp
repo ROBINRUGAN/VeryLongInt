@@ -118,6 +118,7 @@ VeryLongInt::VeryLongInt(string number)
         }
         this->number.emplace_back(temp);
     }
+    this->trimZero();
 }
 
 /**

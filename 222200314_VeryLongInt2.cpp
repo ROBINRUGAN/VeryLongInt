@@ -31,5 +31,9 @@ int main()
     cout << "×Ö·û´®¹¹Ôì£¬ÇÒ×Ö·û´®Îª(-00001): " << endl;
     VeryLongInt v6("-00001");
     cout << v6 << endl;
+
+    cout << "×Ö·û´®¹¹Ôì£¬ÇÒ×Ö·û´®Îª(187647121166609): " << endl;
+    VeryLongInt v7("187647121166609");
+    cout << v7 << endl;
     system("pause");
 }
