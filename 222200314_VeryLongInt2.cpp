@@ -783,6 +783,25 @@ int main()
     }
     catchException
 
+    cout << "按任意键进入下一页..." << endl;
+    getch();
+    prePrint;
+    setYellow;
+    cout << endl << "====================自定义绝对值相减(被减数绝对值大于等于减数)函数测试===================="
+         << endl;
+    setWhite;
+    try
+    {
+        VeryLongInt v1;
+        VeryLongInt v2;
+        cout << "第一个数为字符串构造(-4239367029101410)" << endl << v1 << endl;
+        cout << "第二个数为字符串构造(1231467789101410)" << endl << v2 << endl;
+
+        cout << "两个数的绝对值之差为" << endl << absSubtractUp(v1, v2) << endl;
+
+    }
+    catchException
+
 
     cout << "拜拜ヾ(≧▽≦*)o 按任意键即可退出该系统:)";
     getch();
