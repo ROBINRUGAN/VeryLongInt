@@ -773,12 +773,11 @@ int main()
     setWhite;
     try
     {
-        VeryLongInt v1;
-        VeryLongInt v2;
+        VeryLongInt v1("-4239367029101410");
+        VeryLongInt v2("1231467789101410");
         cout << "第一个数为字符串构造(-4239367029101410)" << endl << v1 << endl;
         cout << "第二个数为字符串构造(1231467789101410)" << endl << v2 << endl;
-
-        cout << "两个数的绝对值之和为" << endl << absAddUp(v1, v2) << endl;
+        cout << "两个数的绝对值之和" << endl << absAddUp(v1, v2) << endl;
 
     }
     catchException
@@ -792,28 +791,98 @@ int main()
     setWhite;
     try
     {
-        VeryLongInt v1;
-        VeryLongInt v2;
+        VeryLongInt v1("-4239367029101410");
+        VeryLongInt v2("1231467789101410");
         cout << "第一个数为字符串构造(-4239367029101410)" << endl << v1 << endl;
         cout << "第二个数为字符串构造(1231467789101410)" << endl << v2 << endl;
-
-        cout << "两个数的绝对值之差为" << endl << absSubtractUp(v1, v2) << endl;
-
+        absAddUp(v1, v2);
+        cout << "两个数的绝对值之差" << endl << absSubtractUp(v1, v2) << endl;
     }
     catchException
 
+    cout << "按任意键进入下一页..." << endl;
+    getch();
+    prePrint;
+    setYellow;
     cout << endl << "====================自定义取绝对值函数测试====================" << endl;
     setWhite;
     try
     {
-        VeryLongInt v1;
-        VeryLongInt v2;
+        VeryLongInt v1("-4239367029101410");
+        VeryLongInt v2("1231467789101410");
         cout << "第一个数为字符串构造(-4239367029101410)" << endl << v1 << endl;
         cout << "第二个数为字符串构造(1231467789101410)" << endl << v2 << endl;
 
         cout << "第一个数的绝对值为" << endl << abs(v1) << endl;
         cout << "第二个数的绝对值为" << endl << abs(v2) << endl;
     }
+    catchException
+
+    cout << "按任意键进入下一页..." << endl;
+    getch();
+    prePrint;
+    setYellow;
+    cout << endl << "====================自定义任意进制转换(2-16进制)的函数测试====================" << endl;
+    setWhite;
+    try
+    {
+        string s1 = "5656161";
+        string s2 = "75431";
+        string s3 = "0x114514abc";
+        string s4 = "0114514666";
+
+        VeryLongInt v1 = s1;
+        VeryLongInt v2 = s2;
+        VeryLongInt v3 = s3;
+        VeryLongInt v4 = s4;
+        cout << "第一个数为十进制字符串(5656161)" << endl;
+        setGreen;
+        cout << v1 << endl;
+        setWhite;
+        cout << "第二个数为十进制字符串(75431)" << endl;
+        setGreen;
+        cout << v2 << endl;
+        setWhite;
+        cout << "第三个数为十六进制字符串(0x114514abc)" << endl;
+        setGreen;
+        cout << v3 << endl;
+        setWhite;
+        cout << "第四个数为八进制字符串(0114514666)" << endl;
+        setGreen;
+        cout << v4 << endl;
+        setWhite;
+
+        cout << "第一个数的二进制为";
+        setGreen;
+        cout << change(s1, 10, 2) << endl << endl;
+        setWhite;
+
+        cout << "第二个数的二进制为";
+        setGreen;
+        cout << change(s2, 10, 2) << endl << endl;
+        setWhite;
+
+        cout << "第一个数的六进制为";
+        setGreen;
+        cout << change(s1, 10, 6) << endl << endl;
+        setWhite;
+
+        cout << "第二个数的六进制为";
+        setGreen;
+        cout << change(s2, 10, 6) << endl << endl;
+        setWhite;
+
+        cout << "第三个数的二进制为";
+        setGreen;
+        cout << change(s3, 16, 2) << endl << endl;
+        setWhite;
+
+        cout << "第四个数的二进制为";
+        setGreen;
+        cout << change(s4, 8, 2) << endl << endl;
+        setWhite;
+    }
+
     catchException
 
     cout << "拜拜ヾ(≧▽≦*)o 按任意键即可退出该系统:)";

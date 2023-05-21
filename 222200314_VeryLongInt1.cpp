@@ -821,6 +821,7 @@ VeryLongInt absAddUp(VeryLongInt first, VeryLongInt second)
         first.number[maxLength] %= BASE;
         maxLength++;
     }
+    first.sign = '+';
     first.trimZero();
     return first;
 }
@@ -837,6 +838,7 @@ VeryLongInt absSubtractUp(VeryLongInt first, VeryLongInt second)
         first.number[maxLength] += borrow * BASE;
         maxLength++;
     }
+    first.sign = '+';
     first.trimZero();
     return first;
 }
