@@ -802,6 +802,19 @@ int main()
     }
     catchException
 
+    cout << endl << "====================自定义取绝对值函数测试====================" << endl;
+    setWhite;
+    try
+    {
+        VeryLongInt v1;
+        VeryLongInt v2;
+        cout << "第一个数为字符串构造(-4239367029101410)" << endl << v1 << endl;
+        cout << "第二个数为字符串构造(1231467789101410)" << endl << v2 << endl;
+
+        cout << "第一个数的绝对值为" << endl << abs(v1) << endl;
+        cout << "第二个数的绝对值为" << endl << abs(v2) << endl;
+    }
+    catchException
 
     cout << "拜拜ヾ(≧▽≦*)o 按任意键即可退出该系统:)";
     getch();
