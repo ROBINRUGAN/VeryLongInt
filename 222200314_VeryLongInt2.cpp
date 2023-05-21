@@ -725,6 +725,31 @@ int main()
     }
     catchException
 
+    cout << "按任意键进入下一页..." << endl;
+    getch();
+    prePrint;
+    setYellow;
+    cout << endl << "====================某一任意字符串和任意字符串关系运算符测试====================" << endl;
+    setWhite;
+    try
+    {
+        VeryLongInt v1("4239367029101410");
+        VeryLongInt v2("1231467789101410");
+
+        cout << "第一个数为字符串构造(4239367029101410)" << endl << v1 << endl;
+        cout << "第二个数为字符串构造(1231467789101410)" << endl << v2 << endl;
+
+        cout << "第一个数 <= 第二个数: " << boolalpha << (v1 <= v2) << endl << endl;
+        cout << "第一个数 == 第二个数: " << boolalpha << (v1 == v2) << endl << endl;
+        cout << "第一个数 > 第二个数: " << boolalpha << (v1 > v2) << endl << endl;
+        cout << "第一个数 >= 第二个数: " << boolalpha << (v1 >= v2) << endl << endl;
+        cout << "第一个数 != 第二个数: " << boolalpha << (v1 != v2) << endl << endl;
+        cout << "第一个数 < 第二个数: " << boolalpha << (v1 < v2) << endl << endl;
+
+
+    }
+    catchException
+
     cout << "拜拜ヾ(≧▽≦*)o 按任意键即可退出该系统:)";
     getch();
 }
