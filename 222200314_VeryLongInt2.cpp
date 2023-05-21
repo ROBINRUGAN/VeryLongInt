@@ -437,8 +437,7 @@ int main()
         cout << "第一个超长整数 * 第二个超长整数" << endl << v1 * v2 << endl;
         cout << "第一个超长整数 / 第二个超长整数" << endl << v1 / v2 << endl;
         cout << "第一个超长整数 % 第二个超长整数" << endl << v1 % v2 << endl;
-        v1 += v2;
-        cout << "第一个超长整数 += 第二个超长整数" << endl << v1 << endl;
+        cout << "第二个超长整数 / 第一个超长整数" << endl << v2 / v1 << endl;
 
         cout << "按任意键进入下一页..." << endl;
         getch();
@@ -447,17 +446,169 @@ int main()
         cout << endl << "====================两个92位超长整数的四则运算====================" << endl;
         setWhite;
 
+        cout << "第二个超长整数 % 第一个超长整数" << endl << v2 % v1 << endl;
+        v1 += v2;
+        cout << "第一个超长整数 += 第二个超长整数" << endl << v1 << endl;
         v1 -= v2;
         cout << "第一个超长整数 -= 第二个超长整数" << endl << v1 << endl;
         v1 *= v2;
         cout << "第一个超长整数 *= 第二个超长整数" << endl << v1 << endl;
+
+        cout << "按任意键进入下一页..." << endl;
+        getch();
+        prePrint;
+        setYellow;
+        cout << endl << "====================两个92位超长整数的四则运算====================" << endl;
+        setWhite;
+
         v1 /= v2;
         cout << "第一个超长整数 /= 第二个超长整数" << endl << v1 << endl;
         v1 %= v2;
         cout << "第一个超长整数 %= 第二个超长整数" << endl << v1 << endl;
+        cout << "第一个超长整数 < 第二个超长整数: " << boolalpha << (v1 < v2) << endl << endl;
+        cout << "第一个超长整数 <= 第二个超长整数: " << boolalpha << (v1 <= v2) << endl << endl;
+        cout << "第一个超长整数 == 第二个超长整数: " << boolalpha << (v1 == v2) << endl << endl;
+        cout << "第一个超长整数 > 第二个超长整数: " << boolalpha << (v1 > v2) << endl << endl;
+        cout << "第一个超长整数 >= 第二个超长整数: " << boolalpha << (v1 >= v2) << endl << endl;
+        cout << "第一个超长整数 != 第二个超长整数: " << boolalpha << (v1 != v2) << endl << endl;
+
     }
     catchException
 
+    cout << "按任意键进入下一页..." << endl;
+    getch();
+    prePrint;
+    setYellow;
+    cout << endl << "====================任意的数除以0的检验====================" << endl;
+    setWhite;
+    try
+    {
+        VeryLongInt v1("1145612345678914654");
+        VeryLongInt v2("0");
+        cout << "第一个数为(1145612345678914654)" << endl << v1 << endl;
+        cout << "第二个数为(0)" << endl << v2 << endl;
+        cout << "第一个数 / 第二个数" << endl << v1 / v2 << endl;
+    }
+    catchException;
+
+    cout << "按任意键进入下一页..." << endl;
+    getch();
+    prePrint;
+    setYellow;
+    cout << endl << "====================任意的数取模0的检验====================" << endl;
+    setWhite;
+
+    try
+    {
+        VeryLongInt v1("1145612345678914654");
+        VeryLongInt v2("0");
+        cout << "第一个数为(1145612345678914654)" << endl << v1 << endl;
+        cout << "第二个数为(0)" << endl << v2 << endl;
+        cout << "第一个数 % 第二个数" << endl << v1 % v2 << endl;
+    }
+    catchException
+
+    cout << "按任意键进入下一页..." << endl;
+    getch();
+    prePrint;
+    setYellow;
+    cout << endl << "====================任意的数加、减、乘0的检验====================" << endl;
+    setWhite;
+
+    try
+    {
+        VeryLongInt v1("1145612345678914654");
+        VeryLongInt v2("0");
+        cout << "第一个数为(1145612345678914654)" << endl << v1 << endl;
+        cout << "第二个数为(0)" << endl << v2 << endl;
+        cout << "第一个数 + 第二个数" << endl << v1 + v2 << endl;
+        cout << "第一个数 - 第二个数" << endl << v1 - v2 << endl;
+        cout << "第一个数 * 第二个数" << endl << v1 * v2 << endl;
+    }
+    catchException;
+
+    cout << "按任意键进入下一页..." << endl;
+    getch();
+    prePrint;
+    setYellow;
+    cout << endl << "====================某一92位超大整数混合自增自减====================" << endl;
+    setWhite;
+
+    try
+    {
+        VeryLongInt v1("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012");
+        VeryLongInt v2;
+        cout
+                << "第一个数为字符串构造(12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012)"
+                << endl << v1 << endl;
+        cout << "第二个数为默认构造" << endl << v2 << endl;
+
+        v2 = ++v1;
+        cout << "第二个数 = ++第一个数" << endl;
+        cout << "第一个数现在的值为" << endl << v1 << endl;
+        cout << "第二个数现在的值为" << endl << v2 << endl;
+
+        v2 = v1++;
+        cout << "第二个数 = 第一个数++" << endl;
+        cout << "第一个数现在的值为" << endl << v1 << endl;
+        cout << "第二个数现在的值为" << endl << v2 << endl;
+
+        v2 = --v1;
+        cout << "第二个数 = --第一个数" << endl;
+        cout << "第一个数现在的值为" << endl << v1 << endl;
+        cout << "第二个数现在的值为" << endl << v2 << endl;
+
+        v2 = v1--;
+        cout << "第二个数 = 第一个数--" << endl;
+        cout << "第一个数现在的值为" << endl << v1 << endl;
+        cout << "第二个数现在的值为" << endl << v2 << endl;
+    }
+    catchException;
+
+    cout << "按任意键进入下一页..." << endl;
+    getch();
+    prePrint;
+    setYellow;
+    cout << endl << "====================某一92位超大整数赋值运算符测试====================" << endl;
+    setWhite;
+    try
+    {
+        VeryLongInt v1("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012");
+        VeryLongInt v2;
+        VeryLongInt v3;
+        cout
+                << "第一个数为字符串构造(12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012)"
+                << endl << v1 << endl;
+        cout << "第二个数为默认构造" << endl << v2 << endl;
+        cout << "第三个数为默认构造" << endl << v3 << endl;
+        v3 = v2 = v1;
+        cout << "第一个数现在的值为" << endl << v1 << endl;
+        cout << "第二个数现在的值为" << endl << v2 << endl;
+        cout << "第三个数现在的值为" << endl << v3 << endl;
+    }
+    catchException;
+
+    cout << "按任意键进入下一页..." << endl;
+    getch();
+    prePrint;
+    setYellow;
+    cout << endl << "====================某一92位超大整数拷贝构造和求负测试====================" << endl;
+    setWhite;
+    try
+    {
+        VeryLongInt v1("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012");
+        VeryLongInt v2(v1);
+        cout
+                << "第一个数为字符串构造(12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012)"
+                << endl << v1 << endl;
+        cout << "第二个数为默认构造" << endl << v2 << endl;
+
+        v2 = -v1;
+
+        cout << "第一个数现在的值为" << endl << v1 << endl;
+        cout << "第二个数现在的值为" << endl << v2 << endl;
+    }
+    catchException
 
     cout << "拜拜ヾ(≧▽≦*)o 按任意键即可退出该系统:)";
     getch();

@@ -150,6 +150,20 @@ public:
      */
     friend VeryLongInt operator-(const VeryLongInt &a, const VeryLongInt &b);
 
+    VeryLongInt operator-()
+    {
+        VeryLongInt temp = *this;
+        if (this->sign == '-')
+        {
+            temp.sign = '+';
+        }
+        else
+        {
+            temp.sign = '-';
+        }
+        return temp;
+    }
+
     /**
     * @brief 处理两个超大整数的-=重载
     */

@@ -567,6 +567,10 @@ bool VeryLongInt::operator==(const VeryLongInt &other) const
  */
 VeryLongInt operator/(const VeryLongInt &self, const VeryLongInt &other)
 {
+    if (other == VeryLongInt("0"))
+    {
+        throw VeryLongIntException("mewww!!! 不能除以0或者取模于0！！");
+    }
     VeryLongInt result, temp;
     for (int i = self.number.size() - 1; i >= 0; i--)
     {
