@@ -601,10 +601,100 @@ int main()
         cout
                 << "第一个数为字符串构造(12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012)"
                 << endl << v1 << endl;
-        cout << "第二个数为默认构造" << endl << v2 << endl;
+        cout << "第二个数为拷贝构造" << endl << v2 << endl;
 
         v2 = -v1;
 
+        cout << "第一个数现在的值为" << endl << v1 << endl;
+        cout << "第二个数现在的值为" << endl << v2 << endl;
+    }
+    catchException
+
+    cout << "按任意键进入下一页..." << endl;
+    getch();
+    prePrint;
+    setYellow;
+    cout << endl << "====================某一92位超大整数和长整型四则运算测试====================" << endl;
+    setWhite;
+    try
+    {
+        VeryLongInt v1("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012");
+        VeryLongInt v2(123456789);
+        cout
+                << "第一个数为字符串构造(12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012)"
+                << endl << v1 << endl;
+        cout << "第二个数为长整型构造(123456789)" << endl << v2 << endl;
+        cout << "第一个数 + 第二个数" << endl << v1 + v2 << endl;
+        cout << "第一个数 - 第二个数" << endl << v1 - v2 << endl;
+
+        cout << "按任意键进入下一页..." << endl;
+        getch();
+        prePrint;
+        setYellow;
+        cout << endl << "====================某一92位超大整数和长整型四则运算测试====================" << endl;
+        setWhite;
+
+        cout << "第一个数 * 第二个数" << endl << v1 * v2 << endl;
+        cout << "第一个数 / 第二个数" << endl << v1 / v2 << endl;
+        cout << "第一个数 % 第二个数" << endl << v1 % v2 << endl;
+
+        cout << "第二个数 + 第一个数" << endl << v2 + v1 << endl;
+
+        cout << "按任意键进入下一页..." << endl;
+        getch();
+        prePrint;
+        setYellow;
+        cout << endl << "====================某一92位超大整数和长整型四则运算测试====================" << endl;
+        setWhite;
+
+        cout << "第二个数 - 第一个数" << endl << v2 - v1 << endl;
+        cout << "第二个数 * 第一个数" << endl << v2 * v1 << endl;
+        cout << "第二个数 / 第一个数" << endl << v2 / v1 << endl;
+        cout << "第二个数 % 第一个数" << endl << v2 % v1 << endl;
+
+        cout << "按任意键进入下一页..." << endl;
+        getch();
+        prePrint;
+        setYellow;
+        cout << endl << "====================某一92位超大整数和长整型四则运算测试====================" << endl;
+        setWhite;
+
+        v1 += v2;
+        cout << "第一个数 += 第二个数" << endl;
+        cout << "第一个数现在的值为" << endl << v1 << endl;
+        cout << "第二个数现在的值为" << endl << v2 << endl;
+
+        v1 -= v2;
+        cout << "第一个数 -= 第二个数" << endl;
+        cout << "第一个数现在的值为" << endl << v1 << endl;
+        cout << "第二个数现在的值为" << endl << v2 << endl;
+
+        cout << "按任意键进入下一页..." << endl;
+        getch();
+        prePrint;
+        setYellow;
+        cout << endl << "====================某一92位超大整数和长整型四则运算测试====================" << endl;
+        setWhite;
+
+        v1 *= v2;
+        cout << "第一个数 *= 第二个数" << endl;
+        cout << "第一个数现在的值为" << endl << v1 << endl;
+        cout << "第二个数现在的值为" << endl << v2 << endl;
+
+        v1 /= v2;
+        cout << "第一个数 /= 第二个数" << endl;
+        cout << "第一个数现在的值为" << endl << v1 << endl;
+        cout << "第二个数现在的值为" << endl << v2 << endl;
+
+        cout << "按任意键进入下一页..." << endl;
+        getch();
+        prePrint;
+        setYellow;
+        cout << endl << "====================某一92位超大整数和长整型四则运算测试====================" << endl;
+        setWhite;
+
+        v1 %= v2;
+        cout << "第一个数 %= 第二个数" << endl;
         cout << "第一个数现在的值为" << endl << v1 << endl;
         cout << "第二个数现在的值为" << endl << v2 << endl;
     }
