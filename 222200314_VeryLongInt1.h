@@ -240,8 +240,6 @@ public:
      * @brief 处理超大整数的后--重载
      */
     VeryLongInt operator--(int);
-
-
 };
 
 /**

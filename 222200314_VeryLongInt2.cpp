@@ -836,53 +836,66 @@ int main()
         VeryLongInt v3 = s3;
         VeryLongInt v4 = s4;
         cout << "第一个数为十进制字符串(5656161)" << endl;
-        setGreen;
         cout << v1 << endl;
-        setWhite;
         cout << "第二个数为十进制字符串(75431)" << endl;
-        setGreen;
         cout << v2 << endl;
-        setWhite;
         cout << "第三个数为十六进制字符串(0x114514abc)" << endl;
-        setGreen;
         cout << v3 << endl;
-        setWhite;
         cout << "第四个数为八进制字符串(0114514666)" << endl;
-        setGreen;
         cout << v4 << endl;
-        setWhite;
 
-        cout << "第一个数的二进制为";
+        cout << "第一个数的二进制为: ";
         setGreen;
         cout << change(s1, 10, 2) << endl << endl;
         setWhite;
 
-        cout << "第二个数的二进制为";
+        cout << "第二个数的二进制为: ";
         setGreen;
         cout << change(s2, 10, 2) << endl << endl;
         setWhite;
 
-        cout << "第一个数的六进制为";
+        cout << "第一个数的六进制为: ";
         setGreen;
         cout << change(s1, 10, 6) << endl << endl;
         setWhite;
 
-        cout << "第二个数的六进制为";
+        cout << "第二个数的六进制为: ";
         setGreen;
         cout << change(s2, 10, 6) << endl << endl;
         setWhite;
 
-        cout << "第三个数的二进制为";
+        cout << "第三个数的二进制为: ";
         setGreen;
         cout << change(s3, 16, 2) << endl << endl;
         setWhite;
 
-        cout << "第四个数的二进制为";
+        cout << "第四个数的二进制为: ";
         setGreen;
         cout << change(s4, 8, 2) << endl << endl;
         setWhite;
     }
 
+    catchException
+
+    cout << "按任意键进入下一页..." << endl;
+    getch();
+    prePrint;
+    setYellow;
+    cout << endl << "====================自定义判断全0字符串测试====================" << endl;
+    setWhite;
+    try
+    {
+        string s1 = "000000";
+        string s2 = "20000";
+        VeryLongInt v1 = s1;
+        VeryLongInt v2 = s2;
+        cout << "第一个数为字符串(000000)" << endl << v1 << endl;
+        cout << "第二个数为字符串(20000)" << endl << v2 << endl;
+
+        cout << "第一个数是全0串吗? " << boolalpha << judge(s1) << endl << endl;
+        cout << "第一个数是全0串吗? " << boolalpha << judge(s2) << endl;
+
+    }
     catchException
 
     cout << "拜拜ヾ(≧▽≦*)o 按任意键即可退出该系统:)";
