@@ -17,29 +17,25 @@ system("cls");                                                                  
 cout << "Copyright (c) 2023-2023 吴荣榜(222200314). All Rights Reserved." << endl << endl;       \
 cout << "欢迎进入MEWWW的超大整数类程序ヾ(≧▽≦*)o" << endl
 
-#define catchException                  \
-catch (VeryLongIntException &e)         \
-{                                       \
-       cout<<VeryLongInt();             \
-    setRed;                             \
-    cout << e.what() << endl<<endl;     \
-    setWhite;                           \
+#define catchException                                                                          \
+catch (VeryLongIntException &e)                                                                 \
+{                                                                                               \
+       cout<<VeryLongInt();                                                                     \
+    setRed;                                                                                     \
+    cout << e.what() << endl<<endl;                                                             \
+    setWhite;                                                                                   \
 }
 
 /**
  * @brief  <h3>采用万进制进行超大整数类的构思，也就是一个单元格可以存储四位的数字
  *
- * <p>
  * 然后这个进制数目不能盲目增大，因为我们还需要进行高精度的乘和除，
  * 过大的话会导致溢出或者无法计算，考虑到int的最大达到2147483647，
  * 10000的平方为一亿，这个也差不多够了，能基本做到充分利用。
  * 否则的话如果开到30000进制也是可以的，但是就是不方便后续的各项操作了，
- * 效率也并没有什么显著提高，因此的话综合考量下采用万进制。
- * <p/>
+ * 效率也并没有什么显著提高，因此的话综合考量下采用万进制。<br/>
  *
- * <p>
  * 这样不仅可以减少运算次数，也能很大的便利于结果的输出。
- * <p/>
  */
 #define BASE 10000
 
@@ -150,19 +146,10 @@ public:
      */
     friend VeryLongInt operator-(const VeryLongInt &a, const VeryLongInt &b);
 
-    VeryLongInt operator-()
-    {
-        VeryLongInt temp = *this;
-        if (this->sign == '-')
-        {
-            temp.sign = '+';
-        }
-        else
-        {
-            temp.sign = '-';
-        }
-        return temp;
-    }
+    /**
+     * @brief 处理超大整数的取负重载
+     */
+    VeryLongInt operator-();
 
     /**
     * @brief 处理两个超大整数的-=重载
@@ -282,7 +269,9 @@ VeryLongInt absSubtractUp(VeryLongInt first, VeryLongInt second);
  */
 VeryLongInt abs(VeryLongInt number);
 
-//判断串是否为全零串
+/**
+ * @brief 判断串是否为全零串
+ */
 bool judge(string s);
 
 /**

@@ -750,6 +750,21 @@ int main()
     }
     catchException
 
+    cout << "按任意键进入下一页..." << endl;
+    getch();
+    prePrint;
+    setYellow;
+    cout << endl << "====================超大整数输入重载运算符测试====================" << endl;
+    setWhite;
+    try
+    {
+        VeryLongInt v1;
+        cin >> v1;
+        cout << "你所输入的数字为" << endl << v1 << endl;
+
+    }
+    catchException
+
     cout << "拜拜ヾ(≧▽≦*)o 按任意键即可退出该系统:)";
     getch();
 }

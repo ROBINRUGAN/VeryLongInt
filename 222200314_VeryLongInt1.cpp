@@ -673,6 +673,20 @@ VeryLongInt::VeryLongInt(const char *a)
     *this = v1;
 }
 
+VeryLongInt VeryLongInt::operator-()
+{
+    VeryLongInt temp = *this;
+    if (this->sign == '-')
+    {
+        temp.sign = '+';
+    }
+    else
+    {
+        temp.sign = '-';
+    }
+    return temp;
+}
+
 
 //重载超大整数的输出功能
 ostream &operator<<(ostream &out, const VeryLongInt &veryLongInt)
