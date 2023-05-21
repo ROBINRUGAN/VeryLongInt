@@ -5,18 +5,31 @@
 #include <windows.h>
 #include <conio.h>
 
+/**
+ * @brief 设置句柄，设置控制台输出的颜色
+ */
 #define setRed SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12)
 #define setGreen SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10)
 #define setYellow SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14)
 #define setWhite SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15)
+
+/**
+ * @brief 封装了两个输出和输入绿色数据的语句
+ */
 #define enter(x) setGreen;cin>>x;cin.clear();cin.ignore();setWhite
 #define print(x) setGreen;cout<<x;setWhite
 
+/**
+ * @brief 封装清屏和每次分屏输出均需要的顶部文字
+ */
 #define prePrint                                                                                \
 system("cls");                                                                                  \
 cout << "Copyright (c) 2023-2023 吴荣榜(222200314). All Rights Reserved." << endl << endl;       \
 cout << "欢迎进入MEWWW的超大整数类程序ヾ(≧▽≦*)o" << endl
 
+/**
+ * @brief 封装抛错的catch操作
+ */
 #define catchException                                                                          \
 catch (VeryLongIntException &e)                                                                 \
 {                                                                                               \
@@ -68,8 +81,15 @@ using namespace std;
 class VeryLongIntException : exception
 {
 public:
+
+    /**
+     * @brief 大整数类的自定义抛错
+     */
     explicit VeryLongIntException(string message);
 
+    /**
+     * @brief 自定义的抛错信息get方法
+     */
     string what();
 
 private:
@@ -197,12 +217,17 @@ public:
     friend VeryLongInt operator*(const VeryLongInt &self, const VeryLongInt &other);
 
     /**
-     * @brief 处理两个超大整数的*=重载
+     * @brief <h3>处理两个超大整数的*重载
+     * <p>时间复杂度为O((n/4)*(m/4))
+     * <p>极端情况下为O(n^2)
      */
     VeryLongInt &operator*=(const VeryLongInt &other);
 
     /**
-     * @brief 处理两个超大整数的/重载
+     * @brief <h3>处理两个超大整数的/重载
+     * <p>利用模拟竖式的思想，并采用二分法确定商的每一位
+     * <p>时间复杂度为O(nmlogm)
+     * <p>可以近似看成O(n^2)
      */
     friend VeryLongInt operator/(const VeryLongInt &self, const VeryLongInt &other);
 

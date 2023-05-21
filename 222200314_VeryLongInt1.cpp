@@ -4,24 +4,25 @@
 
 #include "222200314_VeryLongInt1.h"
 
-
 using namespace std;
 
-
 /**
- * <h3>大整数类的自定义抛错
+ * @brief 大整数类的自定义抛错
  */
 VeryLongIntException::VeryLongIntException(string message) : message(std::move(message))
 {
 }
 
+/**
+ * @brief 自定义的抛错信息get方法
+ */
 string VeryLongIntException::what()
 {
     return message;
 }
 
 /**
- * <h3>超大十进制整数构造函数，转成vector存储
+ * @brief 超大十进制整数构造函数，转成vector存储
  */
 VeryLongInt::VeryLongInt(string number)
 {
@@ -123,7 +124,7 @@ VeryLongInt::VeryLongInt(string number)
 }
 
 /**
- * <h3>默认值为零的无参构造函数
+ * @brief 默认值为零的无参构造函数
  */
 VeryLongInt::VeryLongInt()
 {
@@ -132,7 +133,7 @@ VeryLongInt::VeryLongInt()
 }
 
 /**
- * <h3>检验是不是合法的10进制/16进制/8进制
+ * @brief 检验是不是合法的10进制/16进制/8进制
  */
 int VeryLongInt::check(string number)
 {
@@ -241,6 +242,11 @@ int VeryLongInt::check(string number)
     return type;
 }
 
+/**
+ * @brief 长整型构造函数
+ * <p>然后这个就直接走十进制/八进制/十六进制的低精度构造了，直接一步到位
+ * 让代码变得简洁
+ */
 VeryLongInt::VeryLongInt(long number)
 {
     if (number > std::numeric_limits<long>::max() || number < std::numeric_limits<long>::min())
@@ -267,12 +273,18 @@ VeryLongInt::VeryLongInt(long number)
     }
 }
 
+/**
+ * @brief 拷贝构造函数
+ */
 VeryLongInt::VeryLongInt(const VeryLongInt &other)
 {
     this->number = other.number;
     this->sign = other.sign;
 }
 
+/**
+ * @brief 去掉前导零
+ */
 void VeryLongInt::trimZero()
 {
     while (number.size() > 1 && number.back() == 0)
@@ -281,6 +293,9 @@ void VeryLongInt::trimZero()
     }
 }
 
+/**
+ * @brief 处理两个超大整数的+=重载
+ */
 VeryLongInt VeryLongInt::operator+=(const VeryLongInt &other)
 {
     if (sign == '+' && other.sign == '+')
@@ -322,6 +337,9 @@ VeryLongInt VeryLongInt::operator+=(const VeryLongInt &other)
     return *this;
 }
 
+/**
+ * @brief 处理两个超大整数的+重载
+ */
 VeryLongInt operator+(const VeryLongInt &a, const VeryLongInt &b)
 {
     VeryLongInt res = a;
@@ -329,6 +347,9 @@ VeryLongInt operator+(const VeryLongInt &a, const VeryLongInt &b)
     return res;
 }
 
+/**
+ * @brief 处理两个超大整数的-重载
+ */
 VeryLongInt operator-(const VeryLongInt &a, const VeryLongInt &b)
 {
     VeryLongInt res = a;
@@ -336,6 +357,9 @@ VeryLongInt operator-(const VeryLongInt &a, const VeryLongInt &b)
     return res;
 }
 
+/**
+* @brief 处理两个超大整数的-=重载
+*/
 VeryLongInt &VeryLongInt::operator-=(const VeryLongInt &other)
 {
     if (sign == '+' && other.sign == '+')
@@ -378,7 +402,7 @@ VeryLongInt &VeryLongInt::operator-=(const VeryLongInt &other)
 }
 
 /**
- * <h3>高精度乘上高精度
+ * @brief <h3>处理两个超大整数的*重载
  * <p>时间复杂度为O((n/4)*(m/4))
  * <p>极端情况下为O(n^2)
  */
@@ -411,12 +435,18 @@ VeryLongInt operator*(const VeryLongInt &self, const VeryLongInt &other)
     return result;
 }
 
+/**
+ * @brief 处理两个超大整数的*=重载
+ */
 VeryLongInt &VeryLongInt::operator*=(const VeryLongInt &other)
 {
     *this = ((*this) * other);
     return *this;
 }
 
+/**
+ * @brief 处理两个超大整数的=重载
+ */
 VeryLongInt &VeryLongInt::operator=(const VeryLongInt &other)
 {
     this->sign = other.sign;
@@ -424,7 +454,9 @@ VeryLongInt &VeryLongInt::operator=(const VeryLongInt &other)
     return *this;
 }
 
-
+/**
+ * @brief 处理两个超大整数的\<重载
+ */
 bool VeryLongInt::operator<(const VeryLongInt &other) const
 {
     //负数一定小于正数，直接返回true
@@ -470,6 +502,9 @@ bool VeryLongInt::operator<(const VeryLongInt &other) const
     }
 }
 
+/**
+ * @brief 处理两个超大整数的\<=重载
+ */
 bool VeryLongInt::operator<=(const VeryLongInt &other) const
 {
     if (*this < other || *this == other)
@@ -479,6 +514,9 @@ bool VeryLongInt::operator<=(const VeryLongInt &other) const
     return false;
 }
 
+/**
+ * @brief 处理两个超大整数的>=重载
+ */
 bool VeryLongInt::operator>=(const VeryLongInt &other) const
 {
 
@@ -489,6 +527,9 @@ bool VeryLongInt::operator>=(const VeryLongInt &other) const
     return false;
 }
 
+/**
+ * @brief 处理两个超大整数的>重载
+ */
 bool VeryLongInt::operator>(const VeryLongInt &other) const
 {
     //负数一定小于正数，直接返回false
@@ -534,11 +575,17 @@ bool VeryLongInt::operator>(const VeryLongInt &other) const
     }
 }
 
+/**
+ * @brief 处理两个超大整数的!=重载
+ */
 bool VeryLongInt::operator!=(const VeryLongInt &other) const
 {
     return !(*this == other);
 }
 
+/**
+ * @brief 处理两个超大整数的==重载
+ */
 bool VeryLongInt::operator==(const VeryLongInt &other) const
 {
     if (this->sign != other.sign)
@@ -560,7 +607,7 @@ bool VeryLongInt::operator==(const VeryLongInt &other) const
 }
 
 /**
- * <h3>高精度除以高精度的重载
+ * @brief <h3>处理两个超大整数的/重载
  * <p>利用模拟竖式的思想，并采用二分法确定商的每一位
  * <p>时间复杂度为O(nmlogm)
  * <p>可以近似看成O(n^2)
@@ -624,29 +671,44 @@ VeryLongInt operator/(const VeryLongInt &self, const VeryLongInt &other)
     return result;
 }
 
+/**
+ * @brief 处理两个超大整数的/=重载
+ */
 VeryLongInt &VeryLongInt::operator/=(const VeryLongInt &other)
 {
     *this = ((*this) / other);
     return *this;
 }
 
+/**
+ * @brief 处理两个超大整数的%重载
+ */
 VeryLongInt operator%(const VeryLongInt &self, const VeryLongInt &other)
 {
     return self - self / other * other;
 }
 
+/**
+ * @brief 处理两个超大整数的%=重载
+ */
 VeryLongInt &VeryLongInt::operator%=(const VeryLongInt &other)
 {
     *this = (*this) % other;
     return *this;
 }
 
+/**
+ * @brief 处理超大整数的前++重载
+ */
 VeryLongInt &VeryLongInt::operator++()
 {
     *this += 1;
     return *this;
 }
 
+/**
+ * @brief 处理超大整数的后++重载
+ */
 VeryLongInt VeryLongInt::operator++(int)
 {
     VeryLongInt temp = *this;
@@ -654,12 +716,18 @@ VeryLongInt VeryLongInt::operator++(int)
     return temp;
 }
 
+/**
+ * @brief 处理超大整数的前--重载
+ */
 VeryLongInt &VeryLongInt::operator--()
 {
     *this -= 1;
     return *this;
 }
 
+/**
+ * @brief 处理超大整数的后--重载
+ */
 VeryLongInt VeryLongInt::operator--(int)
 {
     VeryLongInt temp = *this;
@@ -667,12 +735,19 @@ VeryLongInt VeryLongInt::operator--(int)
     return temp;
 }
 
+/**
+ * @brief 字符串常量的构造函数
+ * <p>这是为了重载运算之后方便隐式转换
+ */
 VeryLongInt::VeryLongInt(const char *a)
 {
     VeryLongInt v1((string(a)));
     *this = v1;
 }
 
+/**
+ * @brief 处理超大整数的取负重载
+ */
 VeryLongInt VeryLongInt::operator-()
 {
     VeryLongInt temp = *this;
@@ -687,8 +762,9 @@ VeryLongInt VeryLongInt::operator-()
     return temp;
 }
 
-
-//重载超大整数的输出功能
+/**
+ * @brief 重载输出运算符，输出正确的超大整数
+ */
 ostream &operator<<(ostream &out, const VeryLongInt &veryLongInt)
 {
     string number = "";
@@ -784,7 +860,9 @@ ostream &operator<<(ostream &out, const VeryLongInt &veryLongInt)
     return out;
 }
 
-//重载超大整数的输入功能
+/**
+ * @brief 重载超大整数的输入功能
+ */
 istream &operator>>(istream &in, VeryLongInt &veryLongInt)
 {
     string temp;
@@ -793,12 +871,18 @@ istream &operator>>(istream &in, VeryLongInt &veryLongInt)
     return in;
 }
 
+/**
+ * @brief 重载输入运算符，录入正确的超大整数
+ */
 VeryLongInt abs(VeryLongInt number)
 {
     number.sign = '+';
     return number;
 }
 
+/**
+ * @brief 绝对值的相加
+ */
 VeryLongInt absAddUp(VeryLongInt first, VeryLongInt second)
 {
     //carry存放进位的数字大小，maxLength存放生成的超大整数长度
@@ -826,6 +910,9 @@ VeryLongInt absAddUp(VeryLongInt first, VeryLongInt second)
     return first;
 }
 
+/**
+ * @brief 绝对值的相减，要求是大数减小数
+ */
 VeryLongInt absSubtractUp(VeryLongInt first, VeryLongInt second)
 {
     //borrow存放的是是否借1，maxLength存放的是所生成的超大整数的位数
@@ -843,7 +930,14 @@ VeryLongInt absSubtractUp(VeryLongInt first, VeryLongInt second)
     return first;
 }
 
-string change(string number, int n, int m)   //n进制转m进制只限0-9进制，若涉及带字母的进制，稍作修改即可
+/**
+ * @brief 进制转换函数
+ * @param number 原来的n进制超大整数
+ * @param n 原来的进制
+ * @param m 要转的进制
+ * @return 转换后的字符串
+ */
+string change(string number, int n, int m)
 {
     //这个是用来处理十六进制数时候的string无法直接转换的问题的
     int num = 0;

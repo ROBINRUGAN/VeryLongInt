@@ -164,7 +164,6 @@ int main()
     cout << endl << "====================构造函数的测试====================" << endl;
     setWhite;
 
-
     try
     {
         cout << "字符串构造，且字符串为(12345678q): " << endl;
@@ -351,7 +350,6 @@ int main()
     }
     catchException
 
-
     cout << "按任意键进入下一页..." << endl;
     getch();
     prePrint;
@@ -405,11 +403,11 @@ int main()
 
     cout << "按任意键进入下一页..." << endl;
     getch();
-
     prePrint;
     setYellow;
     cout << endl << "====================两个92位超长整数的四则运算====================" << endl;
     setWhite;
+
     try
     {
         cout
@@ -481,6 +479,7 @@ int main()
     setYellow;
     cout << endl << "====================任意的数除以0的检验====================" << endl;
     setWhite;
+
     try
     {
         VeryLongInt v1("1145612345678914654");
@@ -571,6 +570,7 @@ int main()
     setYellow;
     cout << endl << "====================某一92位超大整数赋值运算符测试====================" << endl;
     setWhite;
+
     try
     {
         VeryLongInt v1("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012");
@@ -594,6 +594,7 @@ int main()
     setYellow;
     cout << endl << "====================某一92位超大整数拷贝构造和求负测试====================" << endl;
     setWhite;
+
     try
     {
         VeryLongInt v1("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012");
@@ -616,6 +617,7 @@ int main()
     setYellow;
     cout << endl << "====================某一92位超大整数和长整型四则运算测试====================" << endl;
     setWhite;
+
     try
     {
         VeryLongInt v1("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012");
@@ -706,6 +708,7 @@ int main()
     setYellow;
     cout << endl << "====================某一任意字符串和任意长整型关系运算符测试====================" << endl;
     setWhite;
+
     try
     {
         VeryLongInt v1("123456789");
@@ -731,6 +734,7 @@ int main()
     setYellow;
     cout << endl << "====================某一任意字符串和任意字符串关系运算符测试====================" << endl;
     setWhite;
+
     try
     {
         VeryLongInt v1("4239367029101410");
@@ -756,6 +760,7 @@ int main()
     setYellow;
     cout << endl << "====================超大整数输入重载运算符测试====================" << endl;
     setWhite;
+
     try
     {
         VeryLongInt v1;
@@ -771,6 +776,7 @@ int main()
     setYellow;
     cout << endl << "====================自定义绝对值相加函数测试====================" << endl;
     setWhite;
+
     try
     {
         VeryLongInt v1("-4239367029101410");
@@ -789,6 +795,7 @@ int main()
     cout << endl << "====================自定义绝对值相减(被减数绝对值大于等于减数)函数测试===================="
          << endl;
     setWhite;
+
     try
     {
         VeryLongInt v1("-4239367029101410");
@@ -806,6 +813,7 @@ int main()
     setYellow;
     cout << endl << "====================自定义取绝对值函数测试====================" << endl;
     setWhite;
+
     try
     {
         VeryLongInt v1("-4239367029101410");
@@ -824,6 +832,7 @@ int main()
     setYellow;
     cout << endl << "====================自定义任意进制转换(2-16进制)的函数测试====================" << endl;
     setWhite;
+
     try
     {
         string s1 = "5656161";
@@ -874,7 +883,6 @@ int main()
         cout << change(s4, 8, 2) << endl << endl;
         setWhite;
     }
-
     catchException
 
     cout << "按任意键进入下一页..." << endl;
@@ -883,6 +891,7 @@ int main()
     setYellow;
     cout << endl << "====================自定义判断全0字符串测试====================" << endl;
     setWhite;
+
     try
     {
         string s1 = "000000";
@@ -893,7 +902,7 @@ int main()
         cout << "第二个数为字符串(20000)" << endl << v2 << endl;
 
         cout << "第一个数是全0串吗? " << boolalpha << judge(s1) << endl << endl;
-        cout << "第一个数是全0串吗? " << boolalpha << judge(s2) << endl;
+        cout << "第一个数是全0串吗? " << boolalpha << judge(s2) << endl << endl;
 
     }
     catchException
