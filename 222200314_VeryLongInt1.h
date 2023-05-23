@@ -257,14 +257,14 @@ public:
     bool operator==(const VeryLongInt &other) const;
 
     /**
-     * @brief 处理两个超大整数的*重载
+     * @brief <h3>处理两个超大整数的*重载
+     * <p>时间复杂度为O((n/4)*(m/4))
+     * <p>极端情况下为O(n^2)
      */
     friend VeryLongInt operator*(const VeryLongInt &self, const VeryLongInt &other);
 
     /**
-     * @brief <h3>处理两个超大整数的*重载
-     * <p>时间复杂度为O((n/4)*(m/4))
-     * <p>极端情况下为O(n^2)
+     * @brief 处理两个超大整数的*=重载
      */
     VeryLongInt &operator*=(const VeryLongInt &other);
 
