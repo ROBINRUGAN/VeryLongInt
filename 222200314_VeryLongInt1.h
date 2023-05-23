@@ -229,32 +229,32 @@ public:
     /**
      * @brief 处理两个超大整数的\<重载
      */
-    bool operator<(const VeryLongInt &other) const;
+    friend bool operator<(const VeryLongInt &self, const VeryLongInt &other);
 
     /**
      * @brief 处理两个超大整数的\<=重载
      */
-    bool operator<=(const VeryLongInt &other) const;
+    friend bool operator<=(const VeryLongInt &self, const VeryLongInt &other);
 
     /**
      * @brief 处理两个超大整数的>重载
      */
-    bool operator>(const VeryLongInt &other) const;
+    friend bool operator>(const VeryLongInt &self, const VeryLongInt &other);
 
     /**
      * @brief 处理两个超大整数的>=重载
      */
-    bool operator>=(const VeryLongInt &other) const;
+    friend bool operator>=(const VeryLongInt &self, const VeryLongInt &other);
 
     /**
      * @brief 处理两个超大整数的!=重载
      */
-    bool operator!=(const VeryLongInt &other) const;
+    friend bool operator!=(const VeryLongInt &self, const VeryLongInt &other);
 
     /**
      * @brief 处理两个超大整数的==重载
      */
-    bool operator==(const VeryLongInt &other) const;
+    friend bool operator==(const VeryLongInt &self, const VeryLongInt &other);
 
     /**
      * @brief <h3>处理两个超大整数的*重载

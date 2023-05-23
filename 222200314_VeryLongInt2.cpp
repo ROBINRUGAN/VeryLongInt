@@ -57,6 +57,7 @@ int main()
     {
         cout << "Ä¬ÈÏ¹¹Ôì: " << endl;
         VeryLongInt v;
+
         cout << v << endl;
     }
     catchException

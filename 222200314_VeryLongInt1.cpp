@@ -498,45 +498,45 @@ VeryLongInt &VeryLongInt::operator=(const VeryLongInt &other)
 /**
  * @brief 处理两个超大整数的\<重载
  */
-bool VeryLongInt::operator<(const VeryLongInt &other) const
+bool operator<(const VeryLongInt &self, const VeryLongInt &other)
 {
     //负数一定小于正数，直接返回true
-    if (this->sign == '-' && other.sign == '+')
+    if (self.sign == '-' && other.sign == '+')
     {
         return true;
     }
     //正数一定大于负数，直接返回false
-    if (this->sign == '+' && other.sign == '-')
+    if (self.sign == '+' && other.sign == '-')
     {
         return false;
     }
     //如果两数相等，直接出去
-    if (*this == other)
+    if (self == other)
     {
         return false;
     }
     //接下来就是都是负号，而且两数不相等的情况
-    if (this->sign == '-' && other.sign == '-')
+    if (self.sign == '-' && other.sign == '-')
     {
-        return !(abs(*this) < abs(other));
+        return !(abs(self) < abs(other));
     }
 
     //接下来就是都是正号，而且两数不相等的情况
-    if (this->number.size() < other.number.size())
+    if (self.number.size() < other.number.size())
     {
         return true;
     }
-    if (this->number.size() > other.number.size())
+    if (self.number.size() > other.number.size())
     {
         return false;
     }
-    for (int i = this->number.size() - 1; i >= 0; i--)
+    for (int i = self.number.size() - 1; i >= 0; i--)
     {
-        if (this->number[i] < other.number[i])
+        if (self.number[i] < other.number[i])
         {
             return true;
         }
-        if (this->number[i] > other.number[i])
+        if (self.number[i] > other.number[i])
         {
             return false;
         }
@@ -546,9 +546,9 @@ bool VeryLongInt::operator<(const VeryLongInt &other) const
 /**
  * @brief 处理两个超大整数的\<=重载
  */
-bool VeryLongInt::operator<=(const VeryLongInt &other) const
+bool operator<=(const VeryLongInt &self, const VeryLongInt &other)
 {
-    if (*this < other || *this == other)
+    if (self < other || self == other)
     {
         return true;
     }
@@ -558,10 +558,10 @@ bool VeryLongInt::operator<=(const VeryLongInt &other) const
 /**
  * @brief 处理两个超大整数的>=重载
  */
-bool VeryLongInt::operator>=(const VeryLongInt &other) const
+bool operator>=(const VeryLongInt &self, const VeryLongInt &other)
 {
 
-    if (*this > other || *this == other)
+    if (self > other || self == other)
     {
         return true;
     }
@@ -571,45 +571,45 @@ bool VeryLongInt::operator>=(const VeryLongInt &other) const
 /**
  * @brief 处理两个超大整数的>重载
  */
-bool VeryLongInt::operator>(const VeryLongInt &other) const
+bool operator>(const VeryLongInt &self, const VeryLongInt &other)
 {
     //负数一定小于正数，直接返回false
-    if (this->sign == '-' && other.sign == '+')
+    if (self.sign == '-' && other.sign == '+')
     {
         return false;
     }
     //正数一定大于负数，直接返回true
-    if (this->sign == '+' && other.sign == '-')
+    if (self.sign == '+' && other.sign == '-')
     {
         return true;
     }
     //如果两数相等，直接出去
-    if (*this == other)
+    if (self == other)
     {
         return false;
     }
     //接下来就是都是负号，而且两数不相等的情况
-    if (this->sign == '-' && other.sign == '-')
+    if (self.sign == '-' && other.sign == '-')
     {
-        return !(abs(*this) > abs(other));
+        return !(abs(self) > abs(other));
     }
 
     //接下来就是都是正号，而且两数不相等的情况
-    if (this->number.size() > other.number.size())
+    if (self.number.size() > other.number.size())
     {
         return true;
     }
-    if (this->number.size() < other.number.size())
+    if (self.number.size() < other.number.size())
     {
         return false;
     }
-    for (int i = this->number.size() - 1; i >= 0; i--)
+    for (int i = self.number.size() - 1; i >= 0; i--)
     {
-        if (this->number[i] > other.number[i])
+        if (self.number[i] > other.number[i])
         {
             return true;
         }
-        if (this->number[i] < other.number[i])
+        if (self.number[i] < other.number[i])
         {
             return false;
         }
@@ -619,27 +619,27 @@ bool VeryLongInt::operator>(const VeryLongInt &other) const
 /**
  * @brief 处理两个超大整数的!=重载
  */
-bool VeryLongInt::operator!=(const VeryLongInt &other) const
+bool operator!=(const VeryLongInt &self, const VeryLongInt &other)
 {
-    return !(*this == other);
+    return !(self == other);
 }
 
 /**
  * @brief 处理两个超大整数的==重载
  */
-bool VeryLongInt::operator==(const VeryLongInt &other) const
+bool operator==(const VeryLongInt &self, const VeryLongInt &other)
 {
-    if (this->sign != other.sign)
+    if (self.sign != other.sign)
     {
         return false;
     }
-    if (this->number.size() != other.number.size())
+    if (self.number.size() != other.number.size())
     {
         return false;
     }
-    for (int i = this->number.size() - 1; i >= 0; i--)
+    for (int i = self.number.size() - 1; i >= 0; i--)
     {
-        if (this->number[i] != other.number[i])
+        if (self.number[i] != other.number[i])
         {
             return false;
         }
