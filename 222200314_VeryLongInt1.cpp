@@ -473,6 +473,14 @@ VeryLongInt operator*(const VeryLongInt &self, const VeryLongInt &other)
     }
     // 去掉前导零
     result.trimZero();
+    if (self.sign == other.sign)
+    {
+        result.sign = '+';
+    }
+    else
+    {
+        result.sign = '-';
+    }
     return result;
 }
 
@@ -655,7 +663,7 @@ bool operator==(const VeryLongInt &self, const VeryLongInt &other)
  */
 VeryLongInt operator/(const VeryLongInt &self, const VeryLongInt &other)
 {
-    if (other == VeryLongInt("0"))
+    if (other == VeryLongInt("0") || other == VeryLongInt("-0"))
     {
         throw VeryLongIntException("mewww!!! 不能除以0或者取模于0！！");
     }
@@ -675,7 +683,7 @@ VeryLongInt operator/(const VeryLongInt &self, const VeryLongInt &other)
         while (left <= right)
         {
             int mid = (left + right) >> 1;
-            if (other * mid <= temp)
+            if (abs(other) * mid <= temp)
             {
                 //双端不断逼近，因此如果我能更新ans，那么我的ans一定更优，
                 // 那么最后一次的ans就是答案
@@ -692,16 +700,12 @@ VeryLongInt operator/(const VeryLongInt &self, const VeryLongInt &other)
         //cout << "temp=" << temp << " " << "other=" << other << " " << endl;
         //cout << "number[i]" << self.number[i] << " " << "ans=" << ans << endl;
         //模拟竖式除法中的减法操作
-        temp = temp - other * ans;
+        temp = temp - abs(other) * ans;
     }
     //去掉前导零
     result.trimZero();
     //更新符号
-    if (self.sign == other.sign && other.sign == '+')
-    {
-        result.sign = '+';
-    }
-    else if (self.sign == other.sign && other.sign == '-')
+    if (self.sign == other.sign)
     {
         result.sign = '+';
     }

@@ -56,9 +56,10 @@ int main()
     try
     {
         cout << "Ä¬ÈÏ¹¹Ôì: " << endl;
-        VeryLongInt v;
+        VeryLongInt v1("2");
+        VeryLongInt v2("-02");
 
-        cout << v << endl;
+        cout << v1 / v2 << endl;
     }
     catchException
 
