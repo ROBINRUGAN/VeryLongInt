@@ -344,32 +344,32 @@ VeryLongInt VeryLongInt::operator+=(const VeryLongInt &other)
         *this = absAddUp(*this, other);
         this->sign = '+';
     }
-    if (sign == '-' && other.sign == '-')
+    else if (sign == '-' && other.sign == '-')
     {
         *this = absAddUp(*this, other);
         this->sign = '-';
     }
-    if (sign == '+' && other.sign == '-')
+    else if (sign == '+' && other.sign == '-')
     {
         if (abs(*this) < abs(other))
         {
             *this = absSubtractUp(other, *this);
             this->sign = '-';
         }
-        if (abs(*this) >= abs(other))
+        else if (abs(*this) >= abs(other))
         {
             *this = absSubtractUp(*this, other);
             this->sign = '+';
         }
     }
-    if (sign == '-' && other.sign == '+')
+    else if (sign == '-' && other.sign == '+')
     {
         if (abs(*this) <= abs(other))
         {
             *this = absSubtractUp(other, *this);
             this->sign = '+';
         }
-        if (abs(*this) > abs(other))
+        else if (abs(*this) > abs(other))
         {
             *this = absSubtractUp(*this, other);
             this->sign = '-';
@@ -410,31 +410,31 @@ VeryLongInt &VeryLongInt::operator-=(const VeryLongInt &other)
             *this = absSubtractUp(other, *this);
             this->sign = '-';
         }
-        if (abs(*this) >= abs(other))
+        else if (abs(*this) >= abs(other))
         {
             *this = absSubtractUp(*this, other);
             this->sign = '+';
         }
     }
-    if (sign == '-' && other.sign == '-')
+    else if (sign == '-' && other.sign == '-')
     {
         if (abs(*this) <= abs(other))
         {
             *this = absSubtractUp(other, *this);
             this->sign = '+';
         }
-        if (abs(*this) > abs(other))
+        else if (abs(*this) > abs(other))
         {
             *this = absSubtractUp(*this, other);
             this->sign = '-';
         }
     }
-    if (sign == '+' && other.sign == '-')
+    else if (sign == '+' && other.sign == '-')
     {
         *this = absAddUp(other, *this);
         this->sign = '+';
     }
-    if (sign == '-' && other.sign == '+')
+    else if (sign == '-' && other.sign == '+')
     {
         *this = absAddUp(other, *this);
         this->sign = '-';
