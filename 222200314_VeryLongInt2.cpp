@@ -56,10 +56,9 @@ int main()
     try
     {
         cout << "默认构造: " << endl;
-        VeryLongInt v1("2");
-        VeryLongInt v2("-02");
+        VeryLongInt v("0");
 
-        cout << v1 / v2 << endl;
+        cout << v << endl;
     }
     catchException
 
@@ -375,7 +374,7 @@ int main()
 
     try
     {
-        cout << "长整型构造，且该长整型为(07777777777): " << endl;
+        cout << "长整型构造，且该长整型为(017777777777): " << endl;
         VeryLongInt v(017777777777);
         cout << v << endl;
     }
@@ -669,11 +668,11 @@ int main()
     try
     {
         VeryLongInt v1("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012");
-        VeryLongInt v2(123456789);
+        long v2 = 123456789;
         cout
                 << "第一个数为字符串构造(12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012)"
                 << endl << v1 << endl;
-        cout << "第二个数为长整型构造(123456789)" << endl << v2 << endl;
+        cout << "第二个数为长整型(123456789)" << endl << v2 << endl;
         cout << "第一个数 + 第二个数" << endl << v1 + v2 << endl;
         cout << "第一个数 - 第二个数" << endl << v1 - v2 << endl;
 
@@ -760,10 +759,10 @@ int main()
     try
     {
         VeryLongInt v1("123456789");
-        VeryLongInt v2(546321987);
+        long v2 = 546321987;
 
         cout << "第一个数为字符串构造(123456789)" << endl << v1 << endl;
-        cout << "第二个数为长整型构造(546321987)" << endl << v2 << endl;
+        cout << "第二个数为长整型(546321987)" << endl << v2 << endl;
 
         cout << "字符串整数 <=长整数: " << boolalpha << (v1 <= v2) << endl << endl;
         cout << "字符串整数 ==长整数: " << boolalpha << (v1 == v2) << endl << endl;
@@ -841,7 +840,7 @@ int main()
     prePrint;
     setYellow;
     cout << endl << "====================自定义绝对值相减(被减数绝对值大于等于减数)函数测试===================="
-            << endl;
+         << endl;
     setWhite;
 
     try
@@ -949,8 +948,8 @@ int main()
         cout << "第一个数为字符串(000000)" << endl << v1 << endl;
         cout << "第二个数为字符串(20000)" << endl << v2 << endl;
 
-        cout << "第一个数是全0串吗? " << boolalpha << judge(s1) << endl << endl;
-        cout << "第一个数是全0串吗? " << boolalpha << judge(s2) << endl << endl;
+        cout << "第一个数是全0串吗? " << boolalpha << !judge(s1) << endl << endl;
+        cout << "第一个数是全0串吗? " << boolalpha << !judge(s2) << endl << endl;
 
     }
     catchException
