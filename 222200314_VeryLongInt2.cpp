@@ -675,7 +675,7 @@ int main()
         cout
                 << "第一个数为字符串构造(12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012)"
                 << endl << v1 << endl;
-        cout << "第二个数为长整型(123456789)" << endl << v2 << endl;
+        cout << "第二个数为长整型(123456789)" << endl << VeryLongInt(v2) << endl;
         cout << "第一个数 + 第二个数" << endl << v1 + v2 << endl;
         cout << "第一个数 - 第二个数" << endl << v1 - v2 << endl;
 
@@ -714,12 +714,12 @@ int main()
         v1 += v2;
         cout << "第一个数 += 第二个数" << endl;
         cout << "第一个数现在的值为" << endl << v1 << endl;
-        cout << "第二个数现在的值为" << endl << v2 << endl;
+        cout << "第二个数现在的值为" << endl << VeryLongInt(v2) << endl;
 
         v1 -= v2;
         cout << "第一个数 -= 第二个数" << endl;
         cout << "第一个数现在的值为" << endl << v1 << endl;
-        cout << "第二个数现在的值为" << endl << v2 << endl;
+        cout << "第二个数现在的值为" << endl << VeryLongInt(v2) << endl;
 
         cout << "按任意键进入下一页..." << endl;
         getch();
@@ -731,12 +731,12 @@ int main()
         v1 *= v2;
         cout << "第一个数 *= 第二个数" << endl;
         cout << "第一个数现在的值为" << endl << v1 << endl;
-        cout << "第二个数现在的值为" << endl << v2 << endl;
+        cout << "第二个数现在的值为" << endl << VeryLongInt(v2) << endl;
 
         v1 /= v2;
         cout << "第一个数 /= 第二个数" << endl;
         cout << "第一个数现在的值为" << endl << v1 << endl;
-        cout << "第二个数现在的值为" << endl << v2 << endl;
+        cout << "第二个数现在的值为" << endl << VeryLongInt(v2) << endl;
 
         cout << "按任意键进入下一页..." << endl;
         getch();
@@ -748,7 +748,7 @@ int main()
         v1 %= v2;
         cout << "第一个数 %= 第二个数" << endl;
         cout << "第一个数现在的值为" << endl << v1 << endl;
-        cout << "第二个数现在的值为" << endl << v2 << endl;
+        cout << "第二个数现在的值为" << endl << VeryLongInt(v2) << endl;
     }
     catchException
 
@@ -765,7 +765,7 @@ int main()
         long v2 = 546321987;
 
         cout << "第一个数为字符串构造(123456789)" << endl << v1 << endl;
-        cout << "第二个数为长整型(546321987)" << endl << v2 << endl;
+        cout << "第二个数为长整型(546321987)" << endl << VeryLongInt(v2) << endl;
 
         cout << "字符串整数 <=长整数: " << boolalpha << (v1 <= v2) << endl << endl;
         cout << "字符串整数 ==长整数: " << boolalpha << (v1 == v2) << endl << endl;
