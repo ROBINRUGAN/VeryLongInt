@@ -40,7 +40,10 @@
  *
  * <h3> 其他需说明的问题
  * <p>
- * 无                                                                                           <br>
+ * 请确保在GB2312的编码形式打开并保存，否则会出现乱码。<br>此外，如果需要在IDE中打开代码文件，需要确保编辑器的编码为GBK，
+ * 否则打开后的中文注释会存在乱码。<br>最后，如果用DevC++软件打开，请确保版本为v6.3及以上，
+ * 否则没有修改编码的选项，打开后的中文注释始终是乱码。
+ * 经测试如果以记事本形式打开，也可以准确显示。
  */
 
 #include "222200314_VeryLongInt1.h"
@@ -1129,4 +1132,57 @@ bool judge(string s)
         }
     }
     return false;
+}
+
+void printTime()
+{
+    //时间指针
+    time_t timePointer;
+
+    //时间结构体指针
+    struct tm *p;
+
+    //格式化拼装之后的时间字符串
+    char timeString[100];
+
+    //用于存储汉字的结构数组，将当天的星期数转换成中文
+    char whichDay[20];
+    time(&timePointer);
+
+    //获取本机时间
+    p = localtime(&timePointer);
+
+    //将对应的星期数转化成中文
+    switch (p->tm_wday)
+    {
+        case 0:
+            strcpy(whichDay, "日");
+            break;
+        case 1:
+            strcpy(whichDay, "一");
+            break;
+        case 2:
+            strcpy(whichDay, "二");
+            break;
+        case 3:
+            strcpy(whichDay, "三");
+            break;
+        case 4:
+            strcpy(whichDay, "四");
+            break;
+        case 5:
+            strcpy(whichDay, "五");
+            break;
+        case 6:
+            strcpy(whichDay, "六");
+            break;
+    }
+
+    //格式化拼接字符串，存储在timeString中
+    sprintf(timeString, "%d年%02d月%02d日 %02d:%02d:%02d 星期%s", 1900 + p->tm_year, 1 + p->tm_mon, p->tm_mday,
+            p->tm_hour,
+            p->tm_min, p->tm_sec, whichDay);
+
+    //打印时间
+    printf("当前日期与时间为: %s\n", timeString);
 }

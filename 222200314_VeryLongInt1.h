@@ -40,7 +40,10 @@
  *
  * <h3> 其他需说明的问题
  * <p>
- * 无                                                                                           <br>
+ * 请确保在GB2312的编码形式打开并保存，否则会出现乱码。<br>此外，如果需要在IDE中打开代码文件，需要确保编辑器的编码为GBK，
+ * 否则打开后的中文注释会存在乱码。<br>最后，如果用DevC++软件打开，请确保版本为v6.3及以上，
+ * 否则没有修改编码的选项，打开后的中文注释始终是乱码。
+ * 经测试如果以记事本形式打开，也可以准确显示。
  */
 
 #ifndef THIRD_222200314_VERYLONGINT1_H
@@ -70,7 +73,7 @@
 #define prePrint                                                                                \
 system("cls");                                                                                  \
 cout << "Copyright (c) 2023-2023 吴荣榜(222200314). All Rights Reserved." << endl << endl;       \
-cout << "欢迎进入MEWWW的超大整数类程序ヾ(≧▽≦*)o" << endl
+cout << "欢迎进入MEWWW的超大整数类程序ヾ(≧▽≦*)o" << endl，
 
 /**
  * @brief 封装抛错的catch操作
@@ -350,5 +353,8 @@ bool judge(string s);
  * @return 转换后的字符串
  */
 string change(string number, int n, int m);
+
+//输出当前日期的函数
+void printTime();
 
 #endif //THIRD_222200314_VERYLONGINT1_H
