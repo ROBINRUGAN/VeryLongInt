@@ -73,7 +73,8 @@
 #define prePrint                                                                                \
 system("cls");                                                                                  \
 cout << "Copyright (c) 2023-2023 吴荣榜(222200314). All Rights Reserved." << endl << endl;       \
-cout << "欢迎进入MEWWW的超大整数类程序ヾ(≧▽≦*)o" << endl，
+printTime();                                                                                    \
+cout << endl << "欢迎进入MEWWW的超大整数类程序ヾ(≧▽≦*)o" << endl
 
 /**
  * @brief 封装抛错的catch操作
