@@ -84,7 +84,7 @@ catch (VeryLongIntException &e)                                                 
 {                                                                                               \
        cout<<VeryLongInt();                                                                     \
     setRed;                                                                                     \
-    cout << e.what() << endl<<endl;                                                             \
+    cout << e.what() << endl << endl;                                                             \
     setWhite;                                                                                   \
 }
 

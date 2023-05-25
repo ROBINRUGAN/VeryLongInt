@@ -788,17 +788,17 @@ int main()
     try
     {
         VeryLongInt v1("4239367029101410");
-        VeryLongInt v2("1231467789101410");
+        string v2 = "1231467789101410";
 
         cout << "第一个数为字符串构造(4239367029101410)" << endl << v1 << endl;
-        cout << "第二个数为字符串构造(1231467789101410)" << endl << v2 << endl;
+        cout << "第二个数为字符串(1231467789101410)" << endl << VeryLongInt(v2) << endl;
 
-        cout << "第一个数 <= 第二个数: " << boolalpha << (v1 <= v2) << endl << endl;
-        cout << "第一个数 == 第二个数: " << boolalpha << (v1 == v2) << endl << endl;
-        cout << "第一个数 > 第二个数: " << boolalpha << (v1 > v2) << endl << endl;
-        cout << "第一个数 >= 第二个数: " << boolalpha << (v1 >= v2) << endl << endl;
-        cout << "第一个数 != 第二个数: " << boolalpha << (v1 != v2) << endl << endl;
-        cout << "第一个数 < 第二个数: " << boolalpha << (v1 < v2) << endl << endl;
+        cout << "第一个数 <= 字符串: " << boolalpha << (v1 <= v2) << endl << endl;
+        cout << "第一个数 == 字符串: " << boolalpha << (v1 == v2) << endl << endl;
+        cout << "第一个数 > 字符串: " << boolalpha << (v1 > v2) << endl << endl;
+        cout << "第一个数 >= 字符串: " << boolalpha << (v1 >= v2) << endl << endl;
+        cout << "第一个数 != 字符串: " << boolalpha << (v1 != v2) << endl << endl;
+        cout << "第一个数 < 字符串: " << boolalpha << (v1 < v2) << endl << endl;
 
 
     }
