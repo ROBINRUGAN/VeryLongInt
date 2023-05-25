@@ -74,7 +74,7 @@ VeryLongInt::VeryLongInt(string number)
 
     if (type == ERROR)
     {
-        this->number.push_back(0);
+        this->number.emplace_back(0);
         throw VeryLongIntException(
                 "mewww!!!! 这不是合法的十进制/八进制/十六进制! (八进制和十六进制记得加上前缀0、0x或0X)");
     }
@@ -945,7 +945,7 @@ VeryLongInt absAddUp(VeryLongInt first, VeryLongInt second)
         // 到时候如果没有进位，多了的0再去掉就可以了
         if (maxLength == first.number.size())
         {
-            first.number.push_back(0);
+            first.number.emplace_back(0);
         }
         // 如果加数比较小，那么就自行补0
         first.number[maxLength] += carry + (maxLength < second.number.size() ? second.number[maxLength] : 0);
